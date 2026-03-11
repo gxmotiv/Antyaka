@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khushi's Special Website 💖</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #FF6B9D;
+            --secondary: #6C63FF;
+            --accent: #FFD93D;
+            --bg: #FFF5F8;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Friendship Test Section */
+        .friendship-test {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .button-container {
+            position: relative;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-yes {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            background: #ff4785;
+        }
+
+        .btn-no {
+            background: var(--secondary);
+            color: white;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+
+        /* Math/Commerce Fun */
+        .math-fun {
+            background: linear-gradient(135deg, #E8F0FE, #F3E8FE);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .math-question {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .math-answer {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .show-answer {
+            background: var(--accent);
+            color: var(--text);
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Call Button */
+        .call-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            background: #ddd;
+            height: 200px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Surprise Section */
+        .surprise {
+            background: linear-gradient(135deg, var(--accent), #FF9800);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .surprise:hover {
+            transform: scale(1.05);
+        }
+
+        .surprise-content {
+            display: none;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .question { font-size: 1.2rem; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Hearts Background -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Header -->
+    <header>
+        <h1>💖 Khushi's Special World 💖</h1>
+        <p>Best Friend | Class 11 Commerce | Studying Abroad</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Friendship Test Section -->
+        <div class="section friendship-test">
+            <h2>💕 Friendship Test 💕</h2>
+            <p class="question">Are you my best friend?</p>
+            <div class="button-container" id="buttonContainer">
+                <button class="btn btn-yes" onclick="yesClicked()">YES! ❤️</button>
+                <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+            </div>
+            <p id="result" style="display:none; margin-top: 20px; font-size: 1.5rem; color: var(--primary);">
+                🎉 I knew it! You're the best! 🎉
+            </p>
+        </div>
+
+        <!-- Math/Commerce Fun Section -->
+        <div class="section">
+            <h2>📐 Math & Commerce Fun 📐</h2>
+            
+            <div class="math-fun">
+                <p class="math-question">Q1: If you + I = Best Friends, then what is 1 + 1?</p>
+                <button class="show-answer" onclick="showAnswer('ans1')">Show Answer</button>
+                <p class="math-answer" id="ans1">Answer: 2 Best Friends! 😄</p>
+            </div>
+
+            <div class="math-fun">
+                <p class="math-question">Q2: Accountancy Rule - Debit what comes in, Credit what goes out. What's the answer?</p>
+                <button class="show-answer" onclick="showAnswer('ans2')">Show Answer</button>
+                <p class="math-answer" id="ans2">Answer: Perfect Balance! ⚖️</p>
+            </div>
+
+            <div class="math-fun">
+                <p class="math-question">Q3: Economics - What's the demand for friendship?</p>
+                <button class="show-answer" onclick="showAnswer('ans3')">Show Answer</button>
+                <p class="math-answer" id="ans3">Answer: INFINITE! 📈</p>
+            </div>
+        </div>
+
+        <!-- Call Button Section -->
+        <div class="section" style="text-align: center;">
+            <h2>📞 Call Me Button 📞</h2>
+            <p>Click to call your best friend!</p>
+            <button class="call-btn" onclick="makeCall()">📱 Call Khushi</button>
+        </div>
+
+        <!-- Memory Gallery Section -->
+        <div class="section">
+            <h2>📸 Memory Lane 📸</h2>
+            <p>Our favorite moments together</p>
+            <div class="gallery">
+                <div class="gallery-item">Photo 1</div>
+                <div class="gallery-item">Photo 2</div>
+                <div class="gallery-item">Photo 3</div>
+                <div class="gallery-item">Photo 4</div>
+            </div>
+        </div>
+
+        <!-- Surprise Section -->
+        <div class="section surprise" onclick="toggleSurprise()">
+            <h2>🎁 Click for a Surprise! 🎁</h2>
+            <p>Tap me to reveal something special!</p>
+            <div class="surprise-content" id="surpriseContent">
+                <p>🎉 Happy Birthday Khushi! 🎉</p>
+                <p>May all your dreams come true! ✨</p>
+                <p>Love you lots! 💖</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Made with ❤️ for Khushi | 2024</p>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+
+        // 1. Running Button Logic
+        let noButtonTimer;
+        let noButtonTimeout;
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const container = document.getElementById('buttonContainer');
+            
+            // Get container dimensions
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate random position within container
+            const maxX = containerRect.width - btnRect.width - 20;
+            const maxY = containerRect.height - btnRect.height - 20;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            // Apply new position
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Change text after 5 seconds
+            clearTimeout(noButtonTimeout);
+            noButtonTimeout = setTimeout(() => {
+                noBtn.textContent = "Okay! 😊";
+                noBtn.disabled = true;
+                noBtn.style.background = '#ccc';
+            }, 5000);
+        }
+
+        // 2. Yes Button Click
+        function yesClicked() {
+            document.getElementById('result').style.display = 'block';
+            createConfetti();
+        }
+
+        // 3. Show Math Answers
+        function showAnswer(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // 4. Call Button
+        function makeCall() {
+            alert('📱 Calling Khushi... 📱\n\n"Hey! Just wanted to say you're amazing!"');
+        }
+
+        // 5. Surprise Toggle
+        function toggleSurprise() {
+            const content = document.getElementById('surpriseContent');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 6. Create Floating Hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['❤️', '💖', '💕', '💗', '💓'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // 7. Confetti Effect
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = ['#FF6B9D', '#6C63FF', '#FFD93D', '#4CAF50'][Math.floor(Math.random() * 4)];
+                confetti.style.zIndex = '1000';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Add CSS for confetti fall animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to { transform: translateY(100vh) rotate(720deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createHearts();
+    </script>
+</body>
+</html>
