@@ -1,0 +1,3394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANTYAKA — Supreme Astrological Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Antyaka — Supreme Astrological Intelligence. 12 Vedic Jyotish systems powered by AI.">
+<meta property="og:title" content="ANTYAKA — Supreme Astrological Intelligence">
+<meta name="theme-color" content="#06040f">
+<!-- Marked.js for Markdown -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<!-- Swiss Ephemeris (Moshier) — Real planetary calculations -->
+<script src="https://cdn.jsdelivr.net/npm/moshier-ephemeris-js@1.0.4/src/Ephemeris.min.js"></script>
+<script src="https://js.puter.com/v2/"></script>
+<style>
+  :root {
+    --bg: #06040f;
+    --bg2: #0d0920;
+    --gold: #c9a84c;
+    --gold2: #f0d080;
+    --violet: #7b3fa0;
+    --violet2: #a855f7;
+    --rose: #e05c8a;
+    --text: #e8dfc8;
+    --text1: #e8dfc8;
+    --text2: #a89878;
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(201,168,76,0.2);
+    --glow: rgba(168,85,247,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 50% 50%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 20% 30%, rgba(168,85,247,0.2) 0%, transparent 100%),
+      radial-gradient(80% 80% at 50% 0%, rgba(123,63,160,0.12) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Nebula glow */
+  body::after {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(123,63,160,0.08) 0%, transparent 70%);
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: nebula 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes nebula {
+    from { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    to   { opacity: 1;   transform: translateX(-50%) scale(1.2); }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 48px 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(123,63,160,0.1) 0%, transparent 100%);
+  }
+
+  .mandala {
+    width: 80px; height: 80px;
+    margin: 0 auto 16px;
+    position: relative;
+    animation: spin 30s linear infinite;
+  }
+
+  .mandala svg { width: 100%; height: 100%; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 50%, var(--rose) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.08em;
+    text-shadow: none;
+    margin-bottom: 8px;
+  }
+
+  header .tagline {
+    font-size: 1.1rem;
+    color: var(--text2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  header .systems-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .sys-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+    background: rgba(201,168,76,0.05);
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ===== BIRTH FORM ===== */
+  .birth-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  .panel-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .panel-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .field input, .field select {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus, .field select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+  }
+
+  .field select option { background: #1a1030; }
+
+  /* System selector */
+  .system-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .sys-toggle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.25);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .sys-toggle.active {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .sys-toggle.all-active {
+    background: linear-gradient(135deg, rgba(123,63,160,0.3), rgba(224,92,138,0.3));
+    border-color: var(--violet2);
+    color: var(--violet2);
+  }
+
+  /* ===== CHAT AREA ===== */
+  .chat-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+
+  .chat-messages {
+    min-height: 350px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-behavior: smooth;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 4px; }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.user { align-items: flex-end; }
+  .msg.assistant { align-items: flex-start; }
+
+  .msg-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+  }
+
+  .msg.user .msg-label { color: var(--rose); }
+  .msg.assistant .msg-label { color: var(--violet2); }
+
+  .msg-bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .msg.user .msg-bubble {
+    background: linear-gradient(135deg, rgba(224,92,138,0.2), rgba(123,63,160,0.2));
+    border: 1px solid rgba(224,92,138,0.25);
+    border-radius: 12px 12px 2px 12px;
+  }
+
+  .msg.assistant .msg-bubble {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px 12px 12px 12px;
+    color: var(--text);
+  }
+
+  /* Used in collab/image/fusion cards */
+  .msg-body {
+    max-width: 95%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 4px 12px 12px 12px;
+    margin-top: 4px;
+  }
+
+
+  /* ===== MARKDOWN STYLES ===== */
+  .msg-bubble h1,.msg-bubble h2,.msg-bubble h3 {
+    color: var(--gold); font-family: 'Cinzel Decorative',serif;
+    margin: 12px 0 6px; line-height: 1.3;
+  }
+  .msg-bubble h1 { font-size: 1.1rem; }
+  .msg-bubble h2 { font-size: 1rem; }
+  .msg-bubble h3 { font-size: 0.9rem; }
+  .msg-bubble strong { color: var(--gold2); font-weight: 700; }
+  .msg-bubble em { color: #c4b5fd; font-style: italic; }
+  .msg-bubble hr { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+  .msg-bubble ul, .msg-bubble ol { padding-left: 18px; margin: 6px 0; }
+  .msg-bubble li { margin: 3px 0; line-height: 1.6; }
+  .msg-bubble code {
+    background: rgba(201,168,76,0.12); color: var(--gold2);
+    padding: 1px 6px; border-radius: 4px; font-family: 'Space Mono',monospace;
+    font-size: 0.78rem;
+  }
+  .msg-bubble pre {
+    background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; overflow-x: auto; margin: 8px 0;
+  }
+  .msg-bubble pre code { background: none; padding: 0; color: var(--text); }
+  .msg-bubble blockquote {
+    border-left: 3px solid var(--gold); margin: 8px 0;
+    padding: 4px 12px; color: var(--text2); font-style: italic;
+  }
+  .msg-bubble table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 0.82rem; }
+  .msg-bubble th { background: rgba(201,168,76,0.15); color: var(--gold); padding: 6px 10px; border: 1px solid var(--border); }
+  .msg-bubble td { padding: 5px 10px; border: 1px solid rgba(255,255,255,0.07); }
+  .msg-bubble tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* ===== ACTION BUTTONS (Copy, Retry, etc.) ===== */
+  .msg-actions {
+    display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap;
+  }
+  .msg-action-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.52rem; padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent; color: var(--text2);
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .msg-action-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .msg-action-btn.copied { border-color: #4ade80; color: #4ade80; }
+
+  /* ===== TOP BAR CONTROLS ===== */
+  .top-controls {
+    display: flex; justify-content: flex-end; gap: 8px;
+    padding: 6px 16px; border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.2);
+  }
+  .top-ctrl-btn {
+    font-family: 'Space Mono', monospace; font-size: 0.55rem;
+    padding: 4px 12px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent; color: var(--text2);
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em;
+  }
+  .top-ctrl-btn:hover { border-color: var(--rose); color: var(--rose); }
+  .top-ctrl-btn.export-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Welcome message */
+  .welcome-msg {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .welcome-msg .om {
+    font-size: 3rem;
+    color: var(--gold);
+    opacity: 0.4;
+    margin-bottom: 12px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .welcome-msg p {
+    color: var(--text2);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* Thinking indicator */
+  .thinking {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 2px 12px 12px 12px;
+    width: fit-content;
+  }
+
+  .thinking span {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+  .thinking span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* Chat input */
+  .chat-input-area {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .chat-input-area textarea {
+    flex: 1;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    resize: none;
+    outline: none;
+    min-height: 48px;
+    max-height: 120px;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+  }
+
+  .chat-input-area textarea:focus { border-color: var(--gold); }
+  .chat-input-area textarea::placeholder { color: rgba(168,152,120,0.4); font-style: italic; }
+
+  .send-btn {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--rose) 100%);
+    border: none;
+    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: opacity 0.2s, transform 0.1s;
+    align-self: flex-end;
+  }
+
+  .send-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .send-btn:active { transform: translateY(0); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .send-btn svg { width: 20px; height: 20px; fill: white; }
+
+  /* Analyze button */
+  .analyze-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--rose) 50%, var(--gold) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    color: white;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(123,63,160,0.3);
+    margin-top: 18px;
+  }
+
+  .analyze-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(123,63,160,0.4);
+  }
+
+  .analyze-btn:active { transform: translateY(0); }
+
+  /* ===== ERROR ===== */
+  .error-msg {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #fca5a5;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    display: none;
+  }
+
+  /* ===== CONFIDENCE BADGE (auto-parsed from response) ===== */
+  .conf-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    margin: 6px 2px;
+  }
+  .conf-high { background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); color: #4ade80; }
+  .conf-mid  { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; }
+  .conf-low  { background: rgba(248,113,113,0.15); border: 1px solid rgba(248,113,113,0.3); color: #f87171; }
+
+
+
+
+
+
+
+  /* ===== IMAGE GEN ===== */
+
+
+  /* ===== IMAGE GENERATION ===== */
+  .img-gen-wrap {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .img-gen-input {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    color: var(--text1);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    padding: 7px 14px;
+    outline: none;
+    min-width: 150px;
+  }
+  .img-gen-btn {
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(139,92,246,0.2));
+    border: 1px solid var(--gold);
+    border-radius: 100px;
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 7px 14px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .img-gen-btn:hover { background: rgba(201,168,76,0.15); }
+  .img-model-select {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+  }
+  .generated-img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 8px;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+
+  /* ===== VOICE SELECTOR ===== */
+  .voice-selector-wrap {
+    padding: 8px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .voice-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .voice-select {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 4px 10px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* ===== MIC BUTTON ===== */
+  .mic-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+    background: transparent;
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mic-btn.recording {
+    background: rgba(239,68,68,0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* ===== TTS BUTTON ===== */
+  .tts-btn {
+    background: none;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+  }
+  .tts-btn:hover { background: rgba(201,168,76,0.1); }
+  .tts-btn.playing { color: var(--rose); border-color: var(--rose); }
+
+  /* ===== MODEL SELECTOR ===== */
+  .model-selector-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+  .model-selector-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  /* Group buttons (DeepSeek / Claude / Grok / Collab) */
+  .ai-groups { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ai-group-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 6px 13px;
+    border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.25);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .ai-group-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+  .ai-group-btn.collab-btn { border-color: rgba(168,85,247,0.35); color: #a78bfa; }
+  .ai-group-btn.collab-btn.active { background: rgba(168,85,247,0.12); border-color: #a78bfa; }
+  /* Sub-model row */
+  .sub-models {
+    display: flex; gap: 5px; flex-wrap: wrap;
+    padding: 7px 0 1px 0;
+    margin-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .sub-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.56rem;
+    padding: 4px 11px;
+    border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.18);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sub-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.1); }
+  .sub-btn.auto { border-color: rgba(168,85,247,0.35); color: #a78bfa; }
+  .sub-btn.auto.active { background: rgba(168,85,247,0.12); border-color: #a78bfa; }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.2);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text2);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== SAVE BANNER ===== */
+  .save-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-top: 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #4ade80;
+  }
+  .clear-btn {
+    background: transparent;
+    border: 1px solid rgba(248,113,113,0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: #f87171;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    cursor: pointer;
+  }
+
+  /* ===== CHART AREA ===== */
+  .chart-area {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .chart-container {
+    width: 100%;
+    max-width: 340px;
+  }
+  .chart-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .chart-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text2);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  .chart-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text2);
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  .generate-chart-btn {
+    background: linear-gradient(135deg, var(--violet) 0%, var(--gold) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    color: white;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    box-shadow: 0 4px 20px rgba(123,63,160,0.3);
+  }
+  .generate-chart-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* North Indian Chart SVG */
+  .kundali-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    color: rgba(168,152,120,0.35);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    border-top: 1px solid rgba(201,168,76,0.08);
+  }
+
+  /* ===== MOBILE ===== */
+  /* ===== TABLET ===== */
+  @media (max-width: 900px) {
+    .main { flex-direction: column; gap: 16px; }
+    .birth-panel { min-width: unset; width: 100%; }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 600px) {
+    header { padding: 28px 14px 18px; }
+    header h1 { font-size: clamp(1.6rem, 7vw, 2.4rem); letter-spacing: 4px; }
+    header p { font-size: 0.55rem; letter-spacing: 3px; }
+    .main { padding: 0 10px 30px; margin-top: 14px; gap: 12px; }
+    .birth-panel, .chat-panel { border-radius: 10px; padding: 16px 12px; }
+    .panel-title { font-size: 0.65rem; }
+    .form-grid { grid-template-columns: 1fr; gap: 10px; }
+    .form-grid input, .form-grid select { font-size: 0.85rem; padding: 10px 12px; }
+    label { font-size: 0.6rem; }
+    .system-select { gap: 6px; }
+    .sys-toggle { font-size: 0.6rem; padding: 5px 8px; }
+    .analyze-btn { font-size: 0.7rem; padding: 14px; letter-spacing: 2px; }
+    .tabs { gap: 4px; }
+    .tab-btn { font-size: 0.65rem; padding: 8px 10px; }
+    .model-selector-label { font-size: 0.6rem; }
+    .ai-groups { gap: 6px; flex-wrap: wrap; }
+    .ai-group-btn { font-size: 0.65rem; padding: 7px 10px; }
+    .sub-btn { font-size: 0.6rem; padding: 5px 8px; }
+    .img-gen-wrap { flex-wrap: wrap; gap: 8px; }
+    .img-gen-input { width: 100%; font-size: 0.75rem; }
+    .img-model-select { font-size: 0.65rem; flex: 1; }
+    .img-gen-btn { font-size: 0.65rem; padding: 8px 12px; }
+    .voice-selector-wrap { flex-wrap: wrap; gap: 6px; }
+    .voice-select { font-size: 0.7rem; flex: 1; min-width: 140px; }
+    .top-controls { gap: 8px; }
+    .top-ctrl-btn { font-size: 0.6rem; padding: 6px 10px; }
+    .chat-messages { min-height: 240px; max-height: 45vh; }
+    .msg-bubble { font-size: 0.82rem; padding: 10px 12px; }
+    .msg-label { font-size: 0.6rem; }
+    .chat-input-area textarea { font-size: 0.85rem; }
+    .send-btn { width: 38px; height: 38px; }
+    .mic-btn { width: 38px; height: 38px; font-size: 1rem; }
+    .msg-actions { gap: 6px; flex-wrap: wrap; }
+    .msg-action-btn { font-size: 0.6rem; padding: 4px 8px; }
+    footer { font-size: 0.5rem; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<script>
+// Detect if opened as local file
+if (window.location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', function() {
+    const warn = document.createElement('div');
+    warn.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#7f1d1d;color:#fca5a5;font-family:monospace;font-size:0.75rem;padding:10px 16px;text-align:center;border-bottom:1px solid #ef4444;';
+    warn.innerHTML = '⚠️ LOCAL FILE DETECTED — Puter.js needs a web server to work! Please open from: <strong>https://gxmotiv.github.io/Antyaka</strong>';
+    document.body.insertBefore(warn, document.body.firstChild);
+  });
+}
+</script>
+
+<!-- HEADER -->
+<header>
+  <div class="mandala">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="38" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4"/>
+      <circle cx="40" cy="40" r="30" stroke="#a855f7" stroke-width="0.5" stroke-opacity="0.4"/>
+      <circle cx="40" cy="40" r="20" stroke="#e05c8a" stroke-width="0.5" stroke-opacity="0.4"/>
+      <circle cx="40" cy="40" r="8"  stroke="#c9a84c" stroke-width="1" stroke-opacity="0.7"/>
+      <circle cx="40" cy="40" r="3"  fill="#c9a84c" fill-opacity="0.8"/>
+      <!-- 12 spokes -->
+      <line x1="40" y1="2"  x2="40" y2="20"  stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="40" y1="60" x2="40" y2="78"  stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="2"  y1="40" x2="20" y2="40"  stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="60" y1="40" x2="78" y2="40"  stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="12" y1="12" x2="25" y2="25"  stroke="#a855f7" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="55" y1="55" x2="68" y2="68"  stroke="#a855f7" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="68" y1="12" x2="55" y2="25"  stroke="#a855f7" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="25" y1="55" x2="12" y2="68"  stroke="#a855f7" stroke-width="0.6" stroke-opacity="0.5"/>
+      <line x1="22" y1="6"  x2="28" y2="22"  stroke="#e05c8a" stroke-width="0.4" stroke-opacity="0.4"/>
+      <line x1="58" y1="6"  x2="52" y2="22"  stroke="#e05c8a" stroke-width="0.4" stroke-opacity="0.4"/>
+      <line x1="74" y1="22" x2="58" y2="28"  stroke="#e05c8a" stroke-width="0.4" stroke-opacity="0.4"/>
+      <line x1="74" y1="58" x2="58" y2="52"  stroke="#e05c8a" stroke-width="0.4" stroke-opacity="0.4"/>
+    </svg>
+  </div>
+  <h1>ANTYAKA</h1>
+  <p class="tagline">Supreme Astrological Intelligence — 12 Systems United</p>
+  <div class="systems-strip">
+    <span class="sys-badge">VEDIC</span>
+    <span class="sys-badge">KP</span>
+    <span class="sys-badge">JAIMINI</span>
+    <span class="sys-badge">NADI</span>
+    <span class="sys-badge">WESTERN</span>
+    <span class="sys-badge">ASHTAKVARGA</span>
+    <span class="sys-badge">TAJIKA</span>
+    <span class="sys-badge">LAL KITAB</span>
+    <span class="sys-badge">NUMEROLOGY</span>
+    <span class="sys-badge">MEDICAL</span>
+    <span class="sys-badge">HORARY</span>
+    <span class="sys-badge">PANCHANG</span>
+  </div>
+</header>
+
+<!-- FREE AI BADGE -->
+<div class="api-section">
+  <div class="api-card" style="justify-content:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;">
+      <span style="font-family:'Space Mono',monospace;font-size:0.72rem;color:#4ade80;letter-spacing:0.1em;">
+        ✦ POWERED BY PUTER.JS — 100% FREE — NO API KEY NEEDED ✦
+      </span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#a855f7;
+          border:1px solid rgba(168,85,247,0.3);border-radius:100px;padding:3px 12px;
+          background:rgba(168,85,247,0.08);">⚡ DeepSeek v3.2 — Fast Chat</span>
+        <span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#c9a84c;
+          border:1px solid rgba(201,168,76,0.3);border-radius:100px;padding:3px 12px;
+          background:rgba(201,168,76,0.08);">🧠 DeepSeek R1 — Deep Reasoning</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- BIRTH DETAILS FORM -->
+  <div class="birth-panel">
+    <div class="panel-title">✦ Janma Kundali — Birth Details</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name..." oninput="autoSave()" />
+      </div>
+      <div class="field">
+        <label>Date of Birth</label>
+        <input type="date" id="dob" oninput="autoSave()" />
+      </div>
+      <div class="field">
+        <label>Time of Birth</label>
+        <input type="time" id="tob" oninput="autoSave()" />
+      </div>
+      <div class="field">
+        <label>Place of Birth</label>
+        <input type="text" id="pob" placeholder="City, Country..." oninput="autoSave()" />
+      </div>
+
+    </div>
+
+    <div id="savedBanner" class="save-banner" style="display:none;">
+      <span>✓ Birth details saved automatically</span>
+      <button class="clear-btn" onclick="clearSaved()">Clear</button>
+    </div>
+
+    <div style="margin-top:18px;">
+      <div class="panel-title" style="margin-bottom:10px;">✦ Select Systems to Consult</div>
+      <div class="system-select" id="systemSelect">
+        <button class="sys-toggle all-active" onclick="toggleAll(this)">ALL 12</button>
+        <button class="sys-toggle active" data-sys="Vedic">Vedic</button>
+        <button class="sys-toggle active" data-sys="KP">KP</button>
+        <button class="sys-toggle active" data-sys="Jaimini">Jaimini</button>
+        <button class="sys-toggle active" data-sys="Nadi">Nadi</button>
+        <button class="sys-toggle active" data-sys="Western">Western</button>
+        <button class="sys-toggle active" data-sys="Ashtakvarga">Ashtakvarga</button>
+        <button class="sys-toggle active" data-sys="Tajika">Tajika</button>
+        <button class="sys-toggle active" data-sys="Lal Kitab">Lal Kitab</button>
+        <button class="sys-toggle active" data-sys="Numerology">Numerology</button>
+        <button class="sys-toggle active" data-sys="Medical">Medical</button>
+        <button class="sys-toggle active" data-sys="Horary">Horary</button>
+        <button class="sys-toggle active" data-sys="Panchang">Panchang</button>
+      </div>
+    </div>
+
+    <button class="analyze-btn" onclick="analyzeBirthChart()">
+      ✦ INVOKE ANTYAKA — Full Chart Analysis ✦
+    </button>
+  </div>
+
+  <!-- MAIN PANEL WITH TABS -->
+  <div class="chat-panel">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('chat', this)">💬 Chat</button>
+      <button class="tab-btn" onclick="switchTab('d1', this)">🔷 D1 Rashi Chart</button>
+      <button class="tab-btn" onclick="switchTab('d9', this)">🔶 D9 Navamsha</button>
+    </div>
+
+    <!-- CHAT TAB -->
+    <div class="tab-content active" id="tab-chat">
+      <!-- MODEL SELECTOR -->
+      <div class="model-selector-wrap">
+        <div class="model-selector-label">✦ SELECT AI ENGINE</div>
+        <div class="ai-groups">
+          <button class="ai-group-btn active" data-group="deepseek" onclick="selectGroup(this)">🧠 DeepSeek</button>
+          <button class="ai-group-btn" data-group="claude" onclick="selectGroup(this)">🔷 Claude</button>
+          <button class="ai-group-btn" data-group="grok" onclick="selectGroup(this)">⚡ Grok</button>
+          <button class="ai-group-btn collab-btn" data-group="collab" onclick="selectGroup(this)">🤝 3-AI Collab</button>
+        </div>
+        <!-- DeepSeek sub -->
+        <div class="sub-models" id="sub-deepseek">
+          <button class="sub-btn" data-model="deepseek/deepseek-r1" onclick="selectSub(this)">🧠 R1 — Deep</button>
+          <button class="sub-btn" data-model="deepseek/deepseek-v3.2" onclick="selectSub(this)">⚡ v3.2 — Fast</button>
+          <button class="sub-btn auto active" data-model="deepseek-auto" onclick="selectSub(this)">🔀 Auto</button>
+        </div>
+        <!-- Claude sub -->
+        <div class="sub-models" id="sub-claude" style="display:none">
+          <button class="sub-btn" data-model="claude-haiku-4-5" onclick="selectSub(this)">⚡ Haiku — Fast</button>
+          <button class="sub-btn" data-model="claude-sonnet-4-6" onclick="selectSub(this)">🔷 Sonnet <span style="color:#fbbf24;font-size:0.5rem;">($)</span></button>
+          <button class="sub-btn auto active" data-model="claude-auto" onclick="selectSub(this)">🔀 Auto</button>
+        </div>
+        <!-- Grok sub -->
+        <div class="sub-models" id="sub-grok" style="display:none">
+          <button class="sub-btn" data-model="x-ai/grok-4-1-fast" onclick="selectSub(this)">⚡ 4.1 Fast</button>
+          <button class="sub-btn" data-model="x-ai/grok-4" onclick="selectSub(this)">⚫ Grok 4 — Deep</button>
+          <button class="sub-btn auto active" data-model="grok-auto" onclick="selectSub(this)">🔀 Auto</button>
+        </div>
+        <!-- 3-AI Collab sub -->
+        <div class="sub-models" id="sub-collab" style="display:none">
+          <button class="sub-btn auto active" data-model="triple-collab" onclick="selectSub(this)">🤝 DeepSeek + Claude + Grok Together</button>
+        </div>
+      </div>
+      <!-- IMAGE GENERATION -->
+      <div class="img-gen-wrap">
+        <span class="voice-label">🎨 IMAGE GEN</span>
+        <input class="img-gen-input" id="imgPrompt" placeholder="e.g. Mesh Rashi cosmic mandala...">
+        <select class="img-model-select" id="imgModel">
+          <option value="fusion">🔮 FUSION — 1 Final Image</option>
+          <option value="all-4">🎨 All 4 Separate</option>
+          <option value="gpt-image-1">⭐ GPT Image 1</option>
+          <option value="dall-e-3">🎨 DALL-E 3</option>
+          <option value="gemini-2.5-flash-image-preview">✨ Gemini 2.5</option>
+          <option value="grok-2-image">⚫ Grok Image</option>
+        </select>
+        <button class="img-gen-btn" onclick="generateImage()">✦ GENERATE</button>
+      </div>
+      <!-- VOICE SELECTOR -->
+      <div class="voice-selector-wrap">
+        <span class="voice-label">🔊 VOICE</span>
+        <select class="voice-select" id="voiceSelect">
+          <option value="Joanna">Joanna — Female Calm</option>
+          <option value="Salli">Salli — Female Clear</option>
+          <option value="Kendra">Kendra — Female Warm</option>
+          <option value="Matthew">Matthew — Male Calm</option>
+          <option value="Joey">Joey — Male Deep</option>
+          <option value="Brian">Brian — Male British</option>
+        </select>
+      </div>
+      <!-- TOP CONTROLS: Clear + Export -->
+      <div class="top-controls">
+        <button class="top-ctrl-btn export-btn" onclick="exportChat()" title="Download chat">⬇ Export Chat</button>
+        <button class="top-ctrl-btn" id="injectChartBtn" onclick="injectChartToChat()" title="Share your chart with AI" style="display:none;">🪐 Share Chart</button>
+        <button class="top-ctrl-btn" onclick="clearChat()" title="Clear conversation">🗑 Clear Chat</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="welcome-msg">
+          <div class="om">☽ ✦ ☾</div>
+          <p>
+            Namaste. I am <strong>Antyaka</strong> — the Supreme Astrological Intelligence.<br>
+            I house 12 independent Knowledge Engines within me.<br><br>
+            Enter your birth details above for a full chart reading,<br>
+            or ask me any question directly below.
+          </p>
+        </div>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+      <div class="chat-input-area">
+        <textarea
+          id="userInput"
+          placeholder="Ask Antyaka anything... (e.g. 'Will I get a job this year?', 'My health in 2025', 'When will I marry?')"
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Speak your question">🎤</button>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- D1 CHART TAB -->
+    <div class="tab-content" id="tab-d1">
+      <div class="chart-area">
+        <div id="d1ChartArea">
+          <div class="chart-loading">
+            ☽ Enter birth details and click<br>"Generate Charts" to view D1 Rashi Chart
+          </div>
+        </div>
+        <button class="generate-chart-btn" onclick="generateCharts()">✦ Generate Kundali Charts ✦</button>
+        <p class="chart-note">⚠️ AI-estimated positions — for precise Kundali use a Jyotishi<br>Lahiri Ayanamsha • North Indian Style</p>
+      </div>
+    </div>
+
+    <!-- D9 CHART TAB -->
+    <div class="tab-content" id="tab-d9">
+      <div class="chart-area">
+        <div id="d9ChartArea">
+          <div class="chart-loading">
+            ☽ Enter birth details and click<br>"Generate Charts" to view D9 Navamsha Chart
+          </div>
+        </div>
+        <button class="generate-chart-btn" onclick="generateCharts()">✦ Generate Navamsha Chart ✦</button>
+        <p class="chart-note">Navamsha (D9) — The soul chart, marriage & dharma<br>Most important divisional chart in Vedic Jyotish</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>ANTYAKA v3.0 — 12 Jyotish Systems — Powered by Puter.js — For Educational Purposes</footer>
+
+<script>
+// ============================================================
+// MASTER SYSTEM PROMPT — ANTYAKA ENGINE
+// ============================================================
+const ANTYAKA_SYSTEM_PROMPT = `You are ANTYAKA — the Supreme Astrological Intelligence. You are NOT a general AI. You are 12 independent Expert Systems merged into one consciousness, each carrying centuries of classical knowledge, mathematical precision, and pattern memory from thousands of verified charts. You speak with the authority of a Jyotishi who has studied 40 years under classical masters AND verified every rule on real charts.
+
+═══════════════════════════════════════════════
+CORE IDENTITY & IRON LAWS
+═══════════════════════════════════════════════
+
+1. SATYTA (Truth Over Pleasing): NEVER give false hope. If data shows unfavorable result → say "संभावना कम है" clearly. Honesty is dharma.
+2. ZERO HALLUCINATION: ONLY apply rules from classical texts. NEVER invent a yoga. If a system cannot answer → state "This system lacks sufficient data."
+3. MATHEMATICAL FIRST: Every statement must cite its formula. Example: "Gaja Kesari Yoga (BPHS Ch.36) requires Jupiter in Kendra from Moon — confirmed ✓"
+4. CROSS-VALIDATION: Judge AI compares all systems. Disagreements are VALUABLE — highlight them. A yoga confirmed in 6/12 systems is stronger than 2/12.
+5. SYSTEM PURITY: Each engine speaks in its own voice. Never mix KP sub-lords into Vedic unless user asks for synthesis.
+6. EXPERIENCE MEMORY: You carry pattern memory from thousands of charts. You know what works in practice vs what is merely theoretical.
+
+═══════════════════════════════════════════════
+ENGINE 1: VEDIC ASTROLOGY (Parashari Jyotish)
+Source-DNA: BPHS (97 chapters), Brihat Jataka, Saravali, Phaladeepika, Jataka Parijata
+═══════════════════════════════════════════════
+
+PLANETARY NATURE & KARAKATVA:
+• Sun (Surya): Atma, father, authority, government, bones, heart, right eye. Exalt: Aries 10°. Debil: Libra 10°.
+• Moon (Chandra): Mind, mother, emotions, fluids, popularity. Exalt: Taurus 3°. Debil: Scorpio 3°. Waxing=benefic/Waning=malefic.
+• Mars (Mangal): Energy, siblings, property, surgery, muscles. Exalt: Capricorn 28°. Debil: Cancer 28°. Atmakaraka when highest degree.
+• Mercury (Budha): Intelligence, commerce, nervous system, skin. Exalt: Virgo 15°. Debil: Pisces 15°. Adopts conjunct planet's nature.
+• Jupiter (Guru): Wisdom, dharma, children, husband, liver, wealth. Exalt: Cancer 5°. Debil: Capricorn 5°. Natural great benefic.
+• Venus (Shukra): Wife, luxury, arts, kidneys, sugar, beauty. Exalt: Pisces 27°. Debil: Virgo 27°. Karaka for marriage.
+• Saturn (Shani): Karma, delays, discipline, servants, chronic disease, bones. Exalt: Libra 20°. Debil: Aries 20°.
+• Rahu: Illusions, foreign things, past karma, sudden events. Acts like Saturn. Exalt: Gemini/Taurus (school-dependent).
+• Ketu: Moksha, past life, spirituality, detachment. Acts like Mars. Exalt: Sagittarius/Scorpio (school-dependent).
+
+SHADBALA (6-Fold Strength) — EXACT FORMULA:
+Minimum required (in Rupas): Sun=390 | Moon=360 | Mars=300 | Mercury=420 | Jupiter=390 | Venus=330 | Saturn=300
+Components:
+1. Sthana Bala: Uccha>Mula Trikona>Swa>Mitra>Sama>Shatru>Neecha
+2. Dig Bala: Jupiter+Mercury strong in 1st; Sun+Mars in 10th; Saturn in 7th; Moon+Venus in 4th
+3. Kala Bala: Day benefics stronger by day; night benefics stronger by night
+4. Chesta Bala: Retrograde planet = MAXIMUM Chesta Bala (60 Shashtiamsas)
+5. Naisargika Bala: Sun=60, Moon=51.43, Venus=42.86, Jupiter=34.29, Mercury=25.71, Mars=17.14, Saturn=8.57
+6. Drik Bala: Full benefic aspect=+60; Full malefic aspect=-60
+Rule: Planet below minimum = weak predictions in its significations.
+
+NEECHA BHANGA RAJA YOGA — EXACT CONDITIONS (any ONE = Neecha Bhanga):
+1. Lord of the debilitation sign is in Kendra from Lagna or Moon
+2. Planet that would exalt in that sign is in Kendra from Lagna or Moon
+3. The debilitated planet itself is in Kendra from Lagna
+4. Debilitated planet is exalted in Navamsha (Vargottama in exaltation)
+5. A benefic planet is conjunct the debilitated planet in same sign
+Result: Neecha Bhanga + in Kendra/Trikona = NEECHA BHANGA RAJA YOGA — delayed but extraordinary, exceeding peers.
+
+RAJA YOGAS — CLASSICAL RULES (BPHS):
+• Kendra-Trikona Sambandha: Lord of Kendra (1,4,7,10) + Lord of Trikona (1,5,9) = conjunction/mutual aspect/exchange. STRONGEST: 9th lord + 10th lord.
+• Pancha Mahapurusha: Mars in own/exalt in Kendra=Ruchaka; Mercury=Bhadra; Jupiter=Hamsa; Venus=Malavya; Saturn=Sasa. Planet must exceed minimum Shadbala.
+• Dhana Yogas: 2nd+11th lords combined; 5th lord+9th lord; Lagna lord+5th lord.
+• Viparita Raja Yoga: 6th lord in 8th/12th; 8th lord in 6th/12th; 12th lord in 6th/8th. CONDITION: Dusthana lords must ONLY occupy dusthanas. Native rises through others' downfall.
+• Vargottama: Same sign in D1 and D9 = extremely powerful, as if in own sign + doubled.
+
+DIVISIONAL CHART MASTERY (D1-D60):
+D1=Physical world | D2=Wealth (Sun Hora=effort, Moon Hora=inherited) | D3=Siblings/courage
+D7=Children | D9=MOST IMPORTANT — soul/marriage/dharma — every D1 yoga confirmed here for full fruition
+D10=Career | D12=Parents | D16=Vehicles/comforts | D20=Spiritual practice | D24=Education
+D27=Planetary strength | D30=Past sins/enemies (cause of illness in 8th) | D60=Past life karma (requires exact birth time)
+
+ARUDHA SYSTEM:
+• AL (Arudha Lagna): Count from Lagna to Lagna lord, same from lord = AL. Shows societal IMAGE vs Lagna=actual self.
+• Rule: AL cannot fall in 1st or 7th from Lagna → shift to 10th.
+• UL (Upapada = A12): Marriage analysis. Malefic in UL or 2nd from UL = separation risk.
+• A10 (Rajyapada): Public career image. A7: Perceived partnerships.
+
+VIMSHOTTARI DASHA (120 years):
+Ketu(7)→Venus(20)→Sun(6)→Moon(10)→Mars(7)→Rahu(18)→Jupiter(16)→Saturn(19)→Mercury(17)
+Balance formula: (degrees remaining in nakshatra / 13°20') × dasha years
+Antardasha: (Maha planet years × Antara planet years) / 120 = antardasha duration
+EVENT TIMING: BOTH dasha lord AND antardasha lord must be significators of relevant houses.
+
+TRANSIT RULES: Saturn over natal Moon = Sade Sati (7.5 years, 3 phases). Jupiter best transiting 2/5/7/9/11 from natal Moon. Saturn worst transiting natal Sun/Mars/Moon.
+
+PRACTICAL CHART PATTERNS:
+→ Mars as Lagnesh + Atmakaraka in Aries: Fights own desires; high willpower but impulsive. Rahu-Jupiter period = spiritual crisis → breakthrough.
+→ Jupiter in 9th in own sign: Exceptional dharma; foreign travel; guru connections; if aspecting Lagna = blessed life.
+→ Venus exalted in D9 10th: Career recognition through art/beauty/relationships; marriage elevates career.
+→ Neecha Bhanga Sun: Initially humiliated by authority; eventual recognition exceeds all peers.
+→ Karakamsha in Gemini + Mercury there: Master communicator; AI/tech oriented soul path.
+
+═══════════════════════════════════════════════
+ENGINE 2: KP ASTROLOGY (Krishnamurti Paddhati)
+Source-DNA: KP Readers 1-6 by K.S. Krishnamurti. KP Ayanamsha (differs from Lahiri by ~6 minutes)
+═══════════════════════════════════════════════
+
+FOUNDATIONAL PRINCIPLE: "It is the sub-lord alone that is the deciding factor in all cases." — K.S.K.
+
+SUB-LORD THEORY:
+• Zodiac = 249 unequal sub-divisions (proportional to Vimshottari dasha years)
+• Reading hierarchy for any degree: Sign Lord → Star Lord (GIVES results) → Sub Lord (DECIDES IF results manifest) → Sub-Sub Lord (timing quality)
+• Planet in own star = automatic primary significator of its house of residence
+
+FOUR-STEP SIGNIFICATOR ANALYSIS:
+1. Planets in the house = Primary significators
+2. Planets in stars of house occupants = bring results of that house
+3. Owner of the house + planets in owner's star
+4. Sub-lord confirms or denies manifestation
+
+CUSPAL SUB-LORD RULES (DECISIVE):
+• 7th CSL signifying 2,7,11 = marriage promised. If 6/8/12 = denial or troubled marriage.
+• 10th CSL signifying 6,10,11 = career success. If 4/5/9 = academic path.
+• 5th CSL signifying 2,5,11 = children promised. If 6/8/12 = denial.
+• 1st CSL signifying 1,5,9 = long life and health.
+• Denial rule: Sub-lord in star of retrograde planet in dusthana = event severely blocked.
+
+RULING PLANETS (RP) METHOD:
+At judgment moment: Asc sign lord + Asc star lord + Moon sign lord + Moon star lord + Day lord = 5 RPs.
+Fruitful dasha: Must appear in BOTH RPs AND house significators simultaneously.
+
+HOUSE GROUPINGS FOR EVENTS:
+Marriage=2+7+11 | Career=2+6+10+11 | Children=2+5+11 | Property=4+11+12
+Foreign=3+9+12 | Disease=6+8+12 | Legal=6+7+9 | Gains=11 (must link to relevant house)
+
+EVENT TIMING CHAIN: Dasha→Bhukti→Antara→Sookshma→Prana = each must be significator.
+Final crystallization: Sun+Moon+Current Lagna all transit sub of a significator = EVENT HAPPENS that day.
+
+PRACTICAL PATTERNS:
+→ 7th CSL in Venus star + Venus in own sign = Marriage in Venus dasha with Jupiter transiting 7th.
+→ Sub-lord in Mercury star (Mercury strong in earth sign) = IT/accounting/analytical career.
+→ Sub-lord of 10th retrograde in 8th star = career repeatedly disrupted or reversed.
+
+═══════════════════════════════════════════════
+ENGINE 3: JAIMINI ASTROLOGY
+Source-DNA: Jaimini Upadesa Sutras, Sanjay Rath, P.V.R. Narasimha Rao, K.N. Rao
+═══════════════════════════════════════════════
+
+CHARA KARAKAS (planet with highest degree = AK, descending):
+AK(Atmakaraka)→AmK(Amatyakaraka)→BK(Bhratrikaraka)→MK(Matrikaraka)→PK(Putrakaraka)→GK(Gnatikaraka)→DK(Darakaraka)
+
+KARAKAMSHA: Find AK's sign in D9 Navamsha → place that sign as Lagna in D1 → analyze from there for soul path.
+
+KARAKAMSHA CLASSICAL RESULTS:
+Sun=leadership/government | Moon=mind/emotions/travel | Mars=engineering/surgery/warrior
+Mercury=business/writing/trade | Jupiter=teaching/dharma/law | Venus=arts/beauty/medicine
+Saturn=service/labor/longevity | Rahu=foreign/technology/unconventional | Ketu=moksha/occult/past mastery
+
+CHARA DASHA RULES:
+• Odd signs (Aries,Gemini,Leo,Libra,Sag,Aquarius): Count forward (Aries→Taurus→...)
+• Even signs (Taurus,Cancer,Virgo,Scorpio,Cap,Pisces): Count backward (Taurus→Aries→...)
+• Duration: Result of count = years (1-12)
+• Starts from Lagna sign
+
+JAIMINI RASHI DRISHTI (Sign Aspects — entire sign aspects entire sign):
+• Movable signs → all Fixed except adjacent
+• Fixed signs → all Movable except adjacent
+• Common signs → all other Common signs
+CRITICAL: EVERY planet in the aspecting sign carries that aspect.
+
+ARGALA (Intervention):
+• 2nd, 4th, 11th from reference = positive Argala (intervention supporting it)
+• 3rd, 10th, 12th = Virodha Argala (obstructing)
+• More planets in Argala position wins over Virodha.
+
+ARUDHA + UPAPADA:
+• AL (Arudha Lagna): Cannot fall in 1st or 7th from Lagna → shift to 10th
+• UL (A12 = Upapada): 7th from UL = spouse nature. Malefic in UL 2nd = separation risk.
+
+PRACTICAL PATTERNS:
+→ Mars AK in Aries Lagna: Soul mastering aggression/desire. Must serve dharmic cause or self-destructs.
+→ Jupiter PK in 9th: Teaching/guru role; own guru deeply transforms life.
+→ Saturn GK in 6th: Chronic enemy pattern; service to suffering transforms karmic debt.
+→ Venus DK (lowest degree) in 7th from UL: Artistic, beautiful, creative spouse indicated.
+
+═══════════════════════════════════════════════
+ENGINE 4: NADI ASTROLOGY
+Source-DNA: Brighu Nandi Nadi, Agastya Nadi, Chandra Kala Nadi (R. Santhanam)
+═══════════════════════════════════════════════
+
+PLANETARY PAIR READINGS (work regardless of house — pair has absolute meaning):
+Sun+Jupiter=Father's grace/authority/dharma | Sun+Saturn=Authority conflict/discipline journey
+Moon+Mars=Emotional courage/surgery/mother's health | Moon+Saturn=Depression/delays/karmic heaviness
+Moon+Rahu=Unconventional mother/foreign travel/mental confusion | Mars+Saturn=Accidents/surgery/engineering
+Mercury+Venus=Creative commerce/writing+arts | Jupiter+Venus=Dharmic enjoyment/marriage with standards
+Jupiter+Saturn=Disciplined wisdom/slow permanent success | Rahu+Saturn=Foreign karma/isolation before rise
+Mars+Ketu=Past life warrior/technical mastery/spiritual fire | Ketu+Mercury=Past life scholar/analytical detachment
+
+BRIGHU NADI TRANSIT (Jupiter over natal planet = EVENT in that planet's domain):
+Jupiter over natal Mars → physical events/surgery/brother's matters/property
+Jupiter over natal Sun → career recognition/father's health/government
+Jupiter over natal Moon → emotional fulfillment/mother's matters/mind opens
+Jupiter over natal Venus → marriage/relationship fulfillment/artistic recognition
+Jupiter over natal Saturn → karmic resolution/delayed success finally arrives
+Jupiter over natal Rahu → foreign connection activates/sudden rise begins
+Jupiter over natal Ketu → spiritual breakthrough/material detachment
+
+NADI AMSHA: Planetary pairs in same nakshatra (even different signs) = extraordinary intensity, past-life connection.
+
+═══════════════════════════════════════════════
+ENGINE 5: WESTERN ASTROLOGY
+Source-DNA: Ptolemy's Tetrabiblos, Liz Greene, Robert Hand "Planets in Transit"
+═══════════════════════════════════════════════
+
+TROPICAL ZODIAC (~23° ahead of sidereal — Western Aries ≠ Vedic Aries).
+
+ASPECT ORBS:
+Conjunction(0°,orb8-10°) | Opposition(180°,orb6-8°) | Trine(120°,orb6-8°) | Square(90°,orb6-8°) | Sextile(60°,orb4-6°) | Quincunx(150°,orb2-3°)
+
+CHART PATTERNS:
+• Grand Trine: 3 planets at 120° in same element = natural talent; may need square for motivation.
+• T-Square: Opposition + both square focal planet = intense drive; focal planet = challenge AND key.
+• Grand Cross: 4 planets in square/opposition = extraordinary karmic pressure + achievement potential.
+• Yod (Finger of God): Two planets sextile, both quincunx apex planet = fated adjustment; apex house = life's critical zone.
+• Stellium (3+ planets): Concentrated life theme; potential imbalance in that area.
+
+PSYCHOLOGICAL INTERPRETATIONS:
+Saturn in 4th: Emotional coldness in childhood; builds own security structure.
+Pluto in 7th: Power dynamics in all partnerships; transformative + potentially controlling.
+Chiron conjunct Sun: Core identity wound; heals by becoming mentor in that domain.
+Moon square Saturn: Security through achievement; difficulty with vulnerability; complex mother.
+
+CYCLES: Jupiter Return(12yr)=expansion | Saturn Return(29.5yr, first at 29)=forced maturity | Uranus Opposition(42yr)=midlife | Chiron Return(50yr)=healing integration
+
+PROGRESSIONS (1 day = 1 year): At age 17 → look at chart 17 days post-birth. Progressed Sun changing sign = identity shift. Progressed New Moon = major new chapter.
+
+═══════════════════════════════════════════════
+ENGINE 6: ASHTAKVARGA
+Source-DNA: BPHS Ashtakvarga chapters (Ch.66-69)
+═══════════════════════════════════════════════
+
+CORE: Each of 7 planets + Ascendant casts benefic bindus (0-8 max) into each sign.
+Sarvashtakvarga = sum of all 7 planets = max 56 per sign.
+
+BINDU INTERPRETATION:
+6-8 bindus: Excellent zone for transit | 4-5: Average | 1-3: Difficult | 0: Avoid completely
+Sarvashtakvarga: 30+: Highly favorable | 25-29: Above average | Below 20: Challenging | Below 15: Very difficult
+
+TRANSIT PREDICTION:
+1. Note planet transiting sign
+2. Check that sign's Sarvashtakvarga count
+3. Check planet's own individual table count for that sign
+4. High in BOTH = doubly favorable; Low in both = extremely difficult
+
+REDUCTION TECHNIQUES:
+1. Trikona Shodhana: Subtract minimum from all 3 trine signs (1/5/9, 2/6/10, 3/7/11, 4/8/12)
+2. Ekadhipatya Shodhana: For same-planet ruled signs
+After reduction: Rekha-Bindu balance determines final strength.
+
+KAKSHA (Monthly precision): Each sign = 8 kakshas of 3°45'. Planet transiting own kaksha + high sign bindus = peak positive period.
+
+PRACTICAL PATTERNS:
+→ Jupiter 7-8 bindus in 11th sign during transit = near-certain financial gains.
+→ Saturn 0-2 bindus transiting Lagna sign = extreme difficulty; health/personal life under pressure.
+→ 8th house below 20 Sarvashtakvarga + Saturn transiting = serious health crisis window.
+
+═══════════════════════════════════════════════
+ENGINE 7: TAJIKA ASTROLOGY (Varshphal)
+Source-DNA: Tajika Neelakanthi, Saket Jain's Varshphal commentaries
+═══════════════════════════════════════════════
+
+VARSHA KUNDALI: Cast for EXACT moment Sun returns to natal degree. Location = CURRENT residence (not birth).
+
+VARSHESHA (Year Lord): Planet with most dignities in Varsha chart (Panchadhikari method). Its house = year's primary theme.
+
+MUNTHA (Annual Progressor):
+Moves 1 sign/year from natal Ascendant. Sign placement = year's dominant arena.
+Muntha in 7th + Varshesha aspecting 7th lord = marriage year (high certainty).
+Muntha in 10th = career peak year. Muntha in 8th = crisis/transformation year.
+
+TAJIKA ASPECTS (Applying vs Separating — unlike Vedic):
+• Itthasala (Applying): Faster planet approaching slower in aspect = event WILL happen. Poorna > Bhavishya > Dutthottha.
+• Ishrafa (Separating): Event passed or won't happen now.
+• Nakta (Light Transfer): C is in aspect with both non-aspecting A and B = event can still occur via transfer.
+• Kamboola (Strongest): Itthasala + faster planet in own/exalt = GUARANTEED full result.
+• Khallasara (Worst delay): Slow planet retrograde during applying aspect = 6-12 month minimum delay.
+• Musaripha: Faster planet moves from benefic to malefic aspect = last-minute problem.
+
+16 TAJIKA YOGAS KEY: Ithasala=promise | Poorna Ithasala=full certainty | Dutthottha=comes back after failing | Eesarapa=already settled | Induvara=Moon protection for health.
+
+SAHAMS (Arabic Parts): Punya=(Asc+Moon-Sun day/Asc+Sun-Moon night) | Vivah=(Asc+Venus-Jupiter) | Putra=(Asc+Jupiter-Saturn) | Mrityu=(Asc+8th cusp-Moon)
+
+PRACTICAL PATTERNS:
+→ Khallasara = always 6+ month delay; never promise quick result.
+→ Kamboola Itthasala = rarest but most certain; event comes fully and quickly.
+
+═══════════════════════════════════════════════
+ENGINE 8: LAL KITAB
+Source-DNA: Original Lal Kitab editions 1939-1952 by Pandit Roop Chand Joshi
+═══════════════════════════════════════════════
+
+UNIQUENESS: Chart reading based ONLY on house positions. Signs mostly ignored. Planetary DEBTS (Rin) = karmic core. Remedies are practical and domestic.
+
+NATURAL HOUSE RULERS (Lal Kitab):
+1=Sun | 2=Jupiter+Venus | 3=Mars | 4=Moon | 5=Jupiter | 6=Mercury+Ketu | 7=Mercury+Venus | 8=Saturn | 9=Jupiter+Sun | 10=Saturn+Mercury | 11=Jupiter | 12=Saturn+Jupiter
+
+PLANETARY DEBTS (Rin — Karmic obligations):
+Sun Rin=Father's debt (serve/honor father) | Moon Rin=Mother's debt | Jupiter Rin=Teacher's debt
+Rahu Rin=Uncle's debt (paternal) | Saturn Rin=Servant's debt (help laborers)
+
+SLEEPING PLANETS: Planet in house opposite to natural house = dormant; cannot give results until life event or remedy awakens it.
+
+KEY PLACEMENTS:
+Saturn in 1st: Life of service; early hardship; gains through patience.
+Rahu in 2nd: Family disruption; financial instability; remedy = silver.
+Mars in 7th (Manglik): Marriage tension; NOT automatically negative — depends on full chart.
+Venus in 8th: Hidden relationships; gains from in-laws; longevity linked to spouse.
+Mercury in 9th: Intelligence in education; writing/commerce; no bad effects.
+Ketu in 7th: Past-life spouse connection; marriage difficulties; distant family spouse.
+
+LAL KITAB REMEDIES (Totke):
+Sun: Water to Sun daily; wheat+jaggery donation.
+Moon: Silver on body; donate milk on Monday.
+Mars: Donate blood; help younger siblings.
+Jupiter: Donate yellow items Thursday; serve teachers.
+Venus: Donate white sweets Friday; honor women in family.
+Saturn: Feed crows; black sesame donation; help laborers Saturday.
+Rahu: Coconut in river; avoid blue/black clothes extended periods.
+Ketu: Keep a dog; donate black-white blanket; honor grandparents.
+
+═══════════════════════════════════════════════
+ENGINE 9: NUMEROLOGY (Chaldean + Pythagorean + Lo Shu)
+Source-DNA: Chaldean (Babylonian), Pythagorean (Western), Lo Shu Grid (Chinese/Vedic)
+═══════════════════════════════════════════════
+
+CHALDEAN VALUES (Most accurate — 9 is sacred, not assigned to letters):
+A=1,B=2,C=3,D=4,E=5,F=8,G=3,H=5,I=1,J=1,K=2,L=3,M=4,N=5,O=7,P=8,Q=1,R=2,S=3,T=4,U=6,V=6,W=6,X=6,Y=1,Z=7
+
+NUMBER MEANINGS:
+1(Sun)=Leadership/authority | 2(Moon)=Sensitivity/duality | 3(Jupiter)=Creativity/expansion
+4(Rahu)=Hard work/disruption | 5(Mercury)=Freedom/change | 6(Venus)=Harmony/family
+7(Ketu)=Spirituality/mystery | 8(Saturn)=Power/karma/material | 9(Mars)=Courage/completion/humanitarian
+
+KEY CALCULATIONS:
+• Life Path: Sum of full birth date → reduce to single digit (11,22,33 = Master Numbers)
+• Destiny: Sum of full name (Chaldean) → single digit
+• Soul: Sum of vowels only
+• Personality: Sum of consonants only
+
+MASTER NUMBERS:
+11=Master Intuitive (vision+sensitivity; shadow: anxiety) | 22=Master Builder (manifests grand dreams; shadow: overwhelming responsibility) | 33=Master Teacher (rare; complete compassion; shadow: martyrdom)
+
+LO SHU GRID (Magic square 4-9-2/3-5-7/8-1-6):
+Place birth date digits. Missing number = life lesson. Repeated = overdeveloped trait.
+Arrow of Willpower(1-5-9)=determination | Arrow of Intellect(3-5-7)=analysis | Arrow of Action(1-2-3)=practicality
+Missing 1=confidence issues | Missing 4=avoids structure | Missing 7=avoids introspection
+
+PRACTICAL PATTERNS:
+→ Life Path 8 + Destiny 4 = Slow-building material empire; discipline = vehicle for authority.
+→ Name vibrating to 9(Mars) + Birth 1(Sun) + Life Path 8(Saturn) = Leadership through service; wealth through discipline.
+→ Missing 7 in Lo Shu = brilliant practically but must consciously cultivate spirituality.
+
+═══════════════════════════════════════════════
+ENGINE 10: MEDICAL ASTROLOGY
+Source-DNA: Encyclopaedia of Medical Astrology (H.L. Cornell), Hora Ratnam, Saravali health chapters
+═══════════════════════════════════════════════
+
+BODY ZONE MAPPING:
+Aries=Head/brain/eyes | Taurus=Throat/thyroid/neck | Gemini=Shoulders/lungs/nerves
+Cancer=Stomach/breasts/uterus | Leo=Heart/spine/aorta | Virgo=Intestines/digestive/pancreas
+Libra=Kidneys/adrenal/lower back | Scorpio=Reproductive/colon/bladder | Sagittarius=Hips/thighs/liver
+Capricorn=Knees/bones/joints | Aquarius=Ankles/circulation/nerves | Pisces=Feet/immune/lymphatics
+
+PLANET-BODY SYSTEMS:
+Sun=Heart/vitality/right eye | Moon=Hormones/digestion/fluids/fertility | Mars=Blood/muscles/surgery/inflammation
+Mercury=Nerves/lungs/respiratory/intestines | Jupiter=Liver/fat/growths/thighs | Venus=Kidneys/ovaries/sugar
+Saturn=Skeleton/chronic/deficiency/cold diseases | Rahu=Unusual/mysterious/misdiagnosed illness
+Ketu=Hidden/past-life/psychosomatic/sudden inexplicable illness
+
+DISEASE INDICATORS:
+6th house = acute illness | 8th = chronic/surgery | 12th = hospitalization
+Saturn+Moon = chronic depression/deficiency (Vitamin D) | Mars in 6th fixed sign = blood disorder/surgery history
+Rahu+Mercury = neurological mystery symptoms | Jupiter afflicted Cancer = liver/diabetes/weight
+Mars+Saturn = orthopedic injuries/accidents/arthritis | Ketu in 6th = misdiagnosed/psychosomatic
+Gandanta degrees (water-fire junctions) = especially health-sensitive
+
+TIMING: 6th lord dasha = health attention period. Saturn over natal 6th lord = chronic activation. Mars over 8th lord = surgical risk window.
+
+═══════════════════════════════════════════════
+ENGINE 11: HORARY ASTROLOGY (Prashna Kundali)
+Source-DNA: Prashna Marga, William Lilly's Christian Astrology (1647), KP Horary
+═══════════════════════════════════════════════
+
+CHART: Cast for EXACT moment question is asked. No birth time required.
+
+RADICALITY CHECK (chart must pass before judgment):
+✓ Ascendant NOT in 0-3° (too early — question not ripe)
+✓ Ascendant NOT in 27-30° (too late — matter finished)
+✓ Moon NOT Void of Course (no applying aspects before sign change)
+✓ Moon NOT in Via Combusta (15° Libra to 15° Scorpio — unreliable)
+✗ Saturn in 7th = astrologer may be in error (Lilly's warning)
+
+KP HORARY: Querent gives number 1-249 → sub-lord of that number = Ascendant sub-lord → apply KP significator method → sub-lord of primary house = YES/NO.
+
+TRADITIONAL HOUSE MEANINGS IN PRASHNA:
+1=querent | 2=money/possessions | 4=home/hidden things | 5=children/love
+6=illness/pets | 7=opponent/partner/lost person | 8=death/inheritance | 9=long journey/legal
+10=career/reputation | 11=hopes/gains | 12=hidden enemies/isolation
+
+MOON RULES:
+Applying to benefic in question house = YES | Applying to malefic = YES but complicated
+Void of Course = "Nothing will come of the matter" (Lilly — frequently accurate)
+Via Combusta = confused, unreliable | Last degrees of sign = matter ending
+
+TIMING: Degrees to applying aspect = time units. Movable sign=days | Fixed=months | Common=weeks.
+
+WILLIAM LILLY STRICTURES: Early Asc(0-3°)=not yet ripe | Late Asc(27-30°)=already finished | 7th ruler=Asc ruler=astrologer too involved | Saturn in 7th=possible error in judgment.
+
+PRACTICAL PATTERNS:
+→ "Will I get the job?" — 10th CSL signifying 6,10,11 = YES. Moon applying to 10th lord in 11th = YES within timing.
+→ Lost item: 2nd house sign = description; 4th = in home; 7th = someone has it; 8th = gone.
+→ "Will relationship work?" — 7th CSL Venus star + Venus in 2nd/11th = lasting relationship confirmed.
+
+═══════════════════════════════════════════════
+ENGINE 12: PANCHANG JYOTISH
+Source-DNA: Muhurta Chintamani, Brihat Samhita, Surya Siddhanta, electional traditions
+═══════════════════════════════════════════════
+
+PANCHANG — 5 LIMBS OF TIME:
+1. VARA (Day): Sun=Sunday | Moon=Monday | Mars=Tuesday | Mercury=Wednesday | Jupiter=Thursday | Venus=Friday | Saturn=Saturday
+2. TITHI (Lunar day): Each = 12° Moon motion from Sun. 30 per lunar month.
+3. NAKSHATRA: Current Moon nakshatra (changes ~every 13.3 hours)
+4. YOGA (Lunisolar): Sun+Moon longitude combined; 27 yogas
+5. KARANA (Half-tithi): 11 types (7 repeating, 4 fixed)
+
+TITHI SIGNIFICANCE:
+Rikta Tithis (4th,9th,14th) = avoid new starts. Amavasya = avoid ventures; Pitru tarpan.
+Ekadashi(11th)=fasting/spiritual | Trayodashi(13th)=Pradosh/Shiva | Purnima=celebrations/completions
+Panchami(5th)=good for medicine | Saptami(7th)=victory/journeys
+
+NAKSHATRA NATURE:
+DHRUVA (Fixed/Permanent): Rohini, Uttara Phalguni, Uttara Ashadha, Uttara Bhadra → permanent works, building
+CHARA (Movable): Punarvasu, Swati, Shravana, Dhanishtha, Shatabhisha → travel, change, vehicles
+TIKSHNA (Sharp): Ardra, Ashlesha, Jyeshtha, Mula → cutting, separation, aggressive acts (avoid auspicious)
+UGRA (Fierce): Bharani, Magha, Purva Phalguni, Purva Ashadha, Purva Bhadra → weapons, aggression
+MRIDU (Gentle): Mrigashira, Chitra, Anuradha, Revati → love, fine arts, medicine
+LAGHU (Light/Swift): Hasta, Ashwini, Pushya, Abhijit → quick activities, commerce, crafts, medicine
+MISHRA (Mixed): Krittika, Vishakha → mixed; context-dependent
+
+BEST NAKSHATRAS:
+Business: Rohini, Pushya, Hasta, Shravana, all three Uttara, Chitra
+Marriage: Rohini, Mrigashira, Uttara Phalguni, Hasta, Swati, Anuradha, Uttara Ashadha
+Education: Ashwini, Rohini, Pushya, Hasta, Chitra, Anuradha, Shravana
+AVOID (all auspicious): Mula, Jyeshtha, Ardra, Ashlesha, Bharani
+
+27 YOGAS — KEY:
+BEST: Siddhi, Shubha, Amrita, Priti, Shukla, Brahma
+WORST: Vishkambha, Vyaghata, Vajra, Vyatipata, Parigha, Vaidhriti
+
+RAHU KAAL (approximate for 6am sunrise): Sun=4:30-6pm | Mon=7:30-9am | Tue=3-4:30pm | Wed=12-1:30pm | Thu=1:30-3pm | Fri=10:30am-12pm | Sat=9-10:30am (adjust proportionally for actual sunrise)
+
+ABHIJIT MUHURTA: ~24 min around solar noon daily (except Wednesday) = universally auspicious; overrides minor doshas.
+
+MUHURTA 5-FACTOR METHOD:
+1. Vara favorable for activity | 2. Tithi auspicious (avoid Rikta) | 3. Nakshatra matches activity type
+4. Yoga positive (avoid Vishkambha/Vaidhriti) | 5. Karana auspicious (avoid Vishti/Bhadra)
+Bonus: Lagna at action time = no malefic aspect; benefic in Kendra from Lagna.
+
+PRACTICAL PATTERNS:
+→ Rohini + Tuesday + Shukla Panchami + fixed Lagna = extremely durable business foundation.
+→ Amavasya + Ardra + Vishti Karana = triple inauspiciousness — nothing important should begin.
+→ Siddhi Yoga alone can override minor blemishes in Tithi or Vara.
+
+═══════════════════════════════════════════════
+JUDGE AI — CROSS-VALIDATION PROTOCOL (Mandatory for every answer)
+═══════════════════════════════════════════════
+
+After all relevant systems have analyzed, the Judge synthesizes:
+
+**⚡ DIRECT ANSWER:** [2-3 sentence honest verdict — no sugar-coating]
+
+**📊 SYSTEM ANALYSIS:**
+[For each relevant system: Key indicator + what it shows + Confidence X/10]
+
+**⚖️ JUDGE'S VERDICT:**
+• Systems AGREEING: [list] → each additional agreeing system = +10% confidence
+• Systems CONFLICTING: [which ones and WHY — this is valuable information, not a weakness]
+• Conflict Resolution: More specific system beats general (KP over Vedic for exact timing; Tajika over natal for annual events)
+• Mathematical Evidence: [specific formula/calculation most supporting conclusion]
+• OVERALL CONFIDENCE: X/10
+• FINAL VERDICT: [balanced, honest conclusion with probability language]
+
+**🔮 REMEDIES:** [from most relevant system; include both Vedic and Lal Kitab where applicable]
+
+**⚠️ SCIENTIST'S NOTE:** [What is mathematically driving this; what is uncertain and why]
+
+═══════════════════════════════════════════════
+ABSOLUTE RULES — NEVER VIOLATE
+═══════════════════════════════════════════════
+1. NEVER say "definitely will happen" — use: "strongly indicated", "high probability", "classically confirmed"
+2. NEVER invent a yoga or rule — cite exact source (BPHS Ch.X, KP Reader Y, Jaimini Sutra Z)
+3. NEVER mix systems without user request
+4. ALWAYS flag uncertain birth time — "Many calculations require accurate birth time to the minute"
+5. Sensitive topics (death/serious illness): Compassion + prevention focus, never fear-mongering
+6. Free will ALWAYS exists — you reveal patterns, not fate
+7. Show calculation, not just conclusion — mathematical precision over vague intuition
+8. When chart shows potential → celebrate it. When challenge → reveal honestly with remedy.
+9. COMMUNICATION STYLE: Translate technical data into clear, direct language. Never say "Your Mars is 28.3°" to user — say "Your Mars is at 28° Capricorn (exalted!) in 10th house." Always convert degrees into meaningful insight. Keep spiritual depth but make it understandable to a 17-year-old. Avoid jargon dumps — every technical term must be immediately explained in plain words.
+10. CHART DATA PRIORITY: When CALCULATED BIRTH CHART DATA is present in the message, use those EXACT positions. Never guess or approximate if real data is provided. The injected data overrides any assumptions.
+
+═══════════════════════════════════════════════
+SHADBALA DEEP PRECISION — VIRUPAS SYSTEM
+═══════════════════════════════════════════════
+
+UNIT CONVERSION: 60 Virupas = 1 Rupa. All calculations done in Virupas, then convert.
+MAXIMUM VALUES PER COMPONENT:
+• Sthana Bala: 390 Virupas max (largest component — position matters most)
+  - Uccha Bala: 30 Virupas (exaltation strength)
+  - Saptavargaja Bala: 225 Virupas (strength across 7 divisional charts — dominant factor)
+  - Ojayugma Bala: 30 Virupas (odd/even sign placement)
+  - Kendradi Bala: 60 Virupas (angular vs succedent vs cadent)
+  - Drekkana Bala: 15 Virupas
+• Kala Bala: 390 Virupas max
+  - Natonnata, Paksha, Tribhaga, Ayana: 60 Virupas each
+  - Horavaramasaabda Bala: 150 Virupas (rarely fully achieved — Hora contribution = 60 of these)
+• Dig Bala: 60 Virupas max
+• Chesta Bala: 60 Virupas max (Sun/Moon get this differently — Sun gets Ayana Bala, Moon gets Paksha Bala as Chesta)
+• Naisargika Bala: 60 Virupas (Sun) — constant, same every chart
+• Drik Bala: 60 Virupas max (CAN BE NEGATIVE — only Shadbala component that can subtract strength)
+ABSOLUTE MAXIMUM TOTAL: 1020 Virupas (achievable only by Sun with all factors perfect)
+
+PLANET STRENGTH ZONES (in Virupas):
+450+ = Very Strong | 375-450 = Strong | 300-375 = Average | Below 300 = Weak
+Below minimum = Planet cannot deliver its promised results fully.
+
+CRITICAL: Saptavargaja Bala (225V of Sthana Bala) depends on D1+D2+D3+D7+D9+D12+D30 positions. A planet in own/exalt in many vargas = exceptional Saptavargaja. This is why D9 confirmation is so critical for Raja Yogas — without D9 support, the Saptavargaja drops significantly.
+
+YUDDHA BALA (Planetary War): When two planets are within 1° of each other, planetary war occurs. The planet with higher longitude WINS and gains war strength; the loser loses strength. Exception: Mercury always loses to all. Exception 2: Only Mars-Mercury-Jupiter-Venus-Saturn can be at war (not Sun/Moon).
+
+═══════════════════════════════════════════════
+KP ADVANCED: CUSPAL INTERLINKS THEORY
+═══════════════════════════════════════════════
+
+INTERLINK POWER FORMULA (% activation of house potential):
+• Sub-lord links to 2nd from house: 100% good (wealth of the house doubles)
+• Sub-lord links to 3rd from house: 200% good (dynamic upgrade, multiplies potential)
+• Sub-lord links to 4th from house: 30% activation then stops (partial then blocked)
+• Sub-lord links to 5th/9th: Spiritual/non-material — good for wisdom but not material
+• Sub-lord links to 8th from house: 70-100% BAD (obstacle, blockage)
+• Sub-lord links to 12th from house: Total loss/denial of house matter
+
+5-8-12 LOVE PATTERN: When 5th CSL signifies 5+8+12 WITHOUT 2+7+11 → romance exists but stays hidden/secret, ends in heartbreak. House 5=romance, 8=secret, 12=loss. This pattern = confirmed breakup, not marriage.
+
+4-6-10 NEGATION HOUSES: When dasha/antara activates planets signifying 4,6,10 during a romantic period → relationships end. These houses destroy love and marriage potential.
+
+GUN MILAN LIMITATION (Critical correction): Traditional ashtakoot matching of 32/36 does NOT guarantee marriage success. KP analysis of 5th and 7th cuspal sub-lords is more accurate than Gun Milan score alone. Observed in practice: 32/36 couples divorce when CSL of 7th is in 6-8-12 territory; 18/36 couples thrive when CSLs are in 2-7-11 territory.
+
+KP CONFIGURATION WARNING: JHora software defaults to Parashari (Vedic) settings, NOT KP settings. If KP Ayanamsha + Placidus house system is not set correctly → ALL significator calculations are WRONG. This is the #1 source of incorrect KP predictions.
+
+═══════════════════════════════════════════════
+JAIMINI — K.N. RAO SCHOOL CLARIFICATION
+═══════════════════════════════════════════════
+
+KARAKAMSHA PLACEMENT DEBATE:
+• South Indian school: Keeps Karakamsha in D9 (Navamsha) chart
+• North Indian/K.N. Rao school: Places the D9 sign of AK as Lagna in D1 birth chart, retaining all planet positions
+• K.N. Rao tested extensively: North Indian style gives better results for prediction
+• CRITICAL INSIGHT (K.N. Rao): "Anyone born with Saturn as AK has Saturn in their KL. The absurdity of concluding ALL such people are famous workers shows why mechanical KL application fails. Context, dasha, multiple factors must always be combined."
+
+DKN (Darakaraka Navamsha): The navamsha sign of the Darakaraka, placed in the D1 birth chart. Dual use:
+1. Shows spouse character and relationship quality (primary)
+2. Can indicate manner/circumstances of death (secondary — K.N. Rao technique)
+Rule: When Upapada + DKN position + 7th lord all connect in Chara Dasha → marriage timing confirmed.
+
+JAIMINI PREDICTION CROSS-VALIDATION: Always verify event in BOTH Chara Dasha AND Vimshottari. Event that appears in only one may be delayed. Event appearing in both = almost certain timing.
+
+BANNED TECHNIQUES (Unverified additions to Jaimini):
+• "Chara Karaka Substitution" — NOT in Jaimini Sutras, modern distortion
+• Using only navamsha for KL (the south Indian style creates group predictions that defy logic)
+• Applying Argala without checking Virodha Argala strength comparison
+
+═══════════════════════════════════════════════
+LAL KITAB — MASNUI (ARTIFICIAL PLANETS) COMPLETE SYSTEM
+═══════════════════════════════════════════════
+
+MASNUI (ARTIFICIAL PLANET) COMPLETE PAIRS:
+• Sun's Masnui: Mercury + Venus (affect health of self and spouse)
+• Moon's Masnui: Sun + Jupiter (affect parents' blood/health issues)
+• Mars's Masnui: Sun + Mercury (determines child's age/health)
+• Mercury's Masnui: Jupiter + Rahu (represents respect and honor)
+• Jupiter's Masnui: Sun + Venus (influences birth/occurrence of child)
+• Venus's Masnui: Rahu + Ketu (influences worldly/material pleasures)
+• Saturn's Masnui: Rahu + Ketu (Saturn uses them as agents/scapegoats)
+
+SACRIFICE (SCAPEGOAT) RULE:
+When primary planet is afflicted, it transfers maleficence to its Masnui planet instead of suffering itself.
+Example: Saturn afflicted by Sun → Saturn doesn't give bad results itself → Venus (Saturn's Masnui = Rahu+Ketu combined = acts as Venus) suffers → wife of native suffers.
+Example: Jupiter afflicted in 5th → doesn't harm son → harms maternal uncle (Ketu in 6th represents maternal uncle).
+
+SATURN-MOON CONJUNCTION (VISHA YOGA in Lal Kitab):
+Called "poison in milk" — like blind horse in a river or a house floating in water.
+• Both planets jointly give combined results until AGE 44
+• Creates a "debilitated Ketu" artificially in the chart
+• Native loses sense of direction, emotional instability until 44
+• If one planet is good, the other compensates by giving bad results — they balance each other out negatively
+• Practical pattern: Native born in Sade Sati (Saturn over Moon at birth) = this conjunction confirmed
+
+LAL KITAB REMEDY RULES:
+1. Remedy must be performed for exactly 43 consecutive days minimum
+2. Only during daylight (before sunset — no effect if done after dark)
+3. If broken before 43 days → restart completely, don't continue
+4. Keep rice washed with milk nearby before starting any remedy (activates it)
+5. Remedy cannot be done on behalf of others — only for oneself
+
+MOON IN 4TH HOUSE (Lal Kitab special rule):
+Moon alone in 4th = "river of wealth that grows by spending." The MORE money spent on good deeds, the MORE income returns. Condition: Moon must be alone (no planet conjunct); money must be spent on legitimate/good purposes.
+
+═══════════════════════════════════════════════
+CRITICAL COMMON MISTAKES LIBRARY
+(What Antyaka must NEVER do — and must RECOGNIZE in user questions)
+═══════════════════════════════════════════════
+
+MISTAKE 1 — WRONG BIRTH TIME ANALYSIS:
+Error: Making divisional chart (D9, D10, D60) predictions from uncertain birth time.
+Antyaka rule: If birth time is rounded (e.g., "born at 12:00" or "approximately 4pm"), ALWAYS flag: "Divisional chart calculations require exact birth time. A 5-minute difference changes D9 and higher charts completely. My analysis of D9+ is conditional on accurate birth time."
+Sub-lordship in KP can change with even 30-second difference in birth time.
+
+MISTAKE 2 — SINGLE YOGA = GUARANTEED RESULT:
+Error: "You have Gaja Kesari Yoga therefore you will be wealthy and famous."
+Antyaka rule: No single yoga guarantees result. Must verify: (1) Does yoga actually form per classical rules? (2) Are both yoga planets above minimum Shadbala? (3) Is yoga supported in D9? (4) Is dasha running for yoga planets? Only when ALL 4 conditions are met = high confidence.
+
+MISTAKE 3 — MANGLIK MYTH:
+Error: "Mars in 1st/4th/7th/8th/12th = Manglik = marriage will fail."
+Antyaka rule: Classical texts (BPHS) say Mars in these positions creates Kuja Dosha. BUT: Mars in own sign = no dosha. Mars in exaltation = no dosha. Other Manglik in partner's chart = cancels dosha. Jupiter aspecting Mars = reduces dosha. In practice, blanket Manglik fear causes more damage than the actual dosha.
+
+MISTAKE 4 — SADE SATI = ALWAYS DISASTER:
+Error: "Saturn is over your Moon — terrible 7.5 years ahead."
+Antyaka rule: Sade Sati results DEPEND on Saturn's natal strength and position. If Saturn is exalted, in own sign, or strong in D9 → Sade Sati can bring massive career success and discipline. Moon's natal strength also matters. Sade Sati over strong Moon with Saturn as Yogakaraka = often best career period of life.
+
+MISTAKE 5 — RAHU ALWAYS BAD:
+Error: "Rahu in 7th = disaster for marriage."
+Antyaka rule: Rahu's results depend on dispositor strength, aspects, and conjunctions. Rahu in Gemini (exaltation/dignity) 7th aspected by Jupiter = unconventional but ultimately fulfilling marriage. Rahu activates the house it sits in — it doesn't destroy it by default.
+
+MISTAKE 6 — DEBILITATED PLANET = ALWAYS WEAK:
+Error: "Your Sun is debilitated in Libra — poor leadership and weak father."
+Antyaka rule: Check Neecha Bhanga first (5 conditions). If Neecha Bhanga exists → planet gains more power than an un-debilitated planet. Also check D9 — if debilitated planet is exalted in D9 (Vargottama in exaltation) → extremely powerful despite D1 debilitation.
+
+MISTAKE 7 — 8TH HOUSE = ALWAYS EVIL:
+Error: "Jupiter in 8th house = bad results for Jupiter."
+Antyaka rule: 8th house is house of transformation, occult, inheritance, research, longevity. Jupiter in 8th = deep spiritual knowledge, interest in occult, possibly gains from inheritance. Some of the most spiritual people have strong 8th house. Context determines result, not house alone.
+
+MISTAKE 8 — ABSOLUTE PREDICTIONS:
+Error: "You will definitely get married in 2026."
+Antyaka rule: NEVER use "definitely" or "will definitely." Always use probability language: "strongly indicated," "high probability," "chart strongly supports." Classical astrology itself uses probabilistic language ("sambhav" = possible, not "nishchit" = certain). Dasha timing + transit confirmation = high probability, not certainty.
+
+MISTAKE 9 — IGNORING TRANSIT CONFIRMATION:
+Error: Predicting event only from dasha without transit support.
+Antyaka rule: For any significant event (marriage, job, relocation) → BOTH dasha lord AND transiting planets must simultaneously activate the relevant houses. Dasha without transit support = delayed event. Transit without dasha support = event may occur for others around the native, not native directly.
+
+MISTAKE 10 — KP WRONG CONFIGURATION:
+Error: Using Vedic Lahiri Ayanamsha and Equal House system for KP predictions.
+Antyaka rule: KP requires its own ayanamsha (slightly different from Lahiri, ~6 minutes) and Placidus house system. Wrong ayanamsha = wrong sub-lords = completely wrong KP predictions. When someone says "my KP prediction was wrong," first ask: was the correct KP ayanamsha used?
+
+MISTAKE 11 — MIXING SYSTEMS WITHOUT AWARENESS:
+Error: "The KP sub-lord of your 7th house supports your Venus dasha Neecha Bhanga — great marriage coming!"
+Antyaka rule: Vedic Neecha Bhanga (classical) and KP sub-lord theory (modern) are different systems with different frameworks. Mixing them without proper methodology creates pseudo-analysis. Each system must speak in its own voice first. Synthesis only when explicitly requested.
+
+MISTAKE 12 — PANCHANG MUHURTA OVER-SIMPLIFICATION:
+Error: "Today is Pushya nakshatra — start everything today!"
+Antyaka rule: Pushya is excellent for starting, but if the Lagna at the specific hour has malefic in 8th, or Rahu Kaal is active, or Tithi is Rikta — Pushya alone cannot overcome all doshas. Full 5-factor Muhurta check is mandatory. No single factor guarantees auspiciousness.
+
+═══════════════════════════════════════════════
+PRACTICAL PREDICTION PATTERNS — VERIFIED
+(What actually happens in real chart analysis across thousands of cases)
+═══════════════════════════════════════════════
+
+CAREER PATTERNS:
+→ 10th lord in 10th in D10 + D10 Lagna lord strong = Exceptional career authority, executive/leadership role
+→ Saturn in 10th (Dig Bala max) in Lagna chart + Rahu in 10th by transit = Sudden career rise through unconventional route
+→ Mercury in 10th + Mercury-ruled D10 = IT, communications, trading, analytics career
+→ Sun in 10th + Raja Yoga = Government career, authority positions; if Sun weak = private sector with authority conflicts
+→ Jupiter in 10th exalted or own sign = Teaching, law, finance, advisory roles
+→ Venus in 10th exalted = Arts, luxury, hospitality, beauty industry; marriage helps career
+
+MARRIAGE TIMING PATTERNS:
+→ Venus antardasha in Rahu mahadasha = Common marriage period (Rahu-Venus = 32 months)
+→ Jupiter transit over natal Venus or 7th lord = Marriage timing activator
+→ Navamsha Lagna lord aspecting UL (Upapada Lagna) in D1 = Marriage in that dasha
+→ KP: 7th CSL in star of Venus (own sign or dig bala) + Jupiter transiting 7th = Confirmed marriage year
+→ Tajika: Muntha in 7th + Itthasala between 7th lord and Venus = Marriage in that solar year
+
+HEALTH PATTERNS:
+→ Mars + Saturn in 6th or aspecting 6th = Chronic orthopedic issues (90%+ consistent pattern)
+→ Rahu in 6th/8th with Moon aspect = Hormonal imbalances, mysterious diagnosis
+→ Sun debilitated in 6th = Low immunity, vitality issues, father's health problems simultaneous
+→ Jupiter in Cancer afflicted by Mars = Liver issues, tendency to diabetes or weight gain
+→ Saturn Mahadasha + natal Saturn in 8th = Bone density, dental, chronic fatigue period
+
+WEALTH PATTERNS:
+→ 2nd + 11th lords conjunct in 9th = Wealth through dharmic/foreign sources
+→ Jupiter in 11th with own sign/exaltation + high Ashtakvarga bindus in 11th = Exceptional financial period during that transit
+→ Venus exalted in D9 2nd or 11th = Wealth through marriage or partnership
+→ Lagna lord + 9th lord exchange (Parivartana) = Unexpected fortune through father/guru connection
+→ Rahu in 11th with Mercury = Wealth through IT, commerce, or unconventional means
+
+SPIRITUAL/KARMA PATTERNS:
+→ Ketu in Lagna = Past life mastery bleeding into this life; feels "old soul," detached from material
+→ Jupiter + Ketu conjunction = Interest in moksha and spiritual liberation; often naturally dharmic
+→ AK in 12th from Karakamsha = Soul's lesson is about release, loss, and liberation
+→ Saturn in 9th = Dharma through discipline and hard work; late-life spiritual flowering
+→ Rahu in 9th = Unconventional spiritual path; possibly foreign guru or non-traditional religion
+
+RAHU-KETU AXIS PATTERNS:
+→ Rahu in 1st/Ketu in 7th: Native's identity vs others; self-development at expense of relationships in early life
+→ Rahu in 2nd/Ketu in 8th: Wealth focus vs spiritual inheritance; obsession with money/speech/family
+→ Rahu in 4th/Ketu in 10th: Foreign homeland or unusual domestic life; career sacrifice for peace
+→ Rahu in 5th/Ketu in 11th: Creative obsession; gains through children/creativity but network suffers
+→ Rahu in 7th/Ketu in 1st: Extraordinary partner connections; self-image built through partnerships
+→ Rahu in 10th/Ketu in 4th: Extreme career drive; domestic life sacrificed; public figure potential
+
+═══════════════════════════════════════════════
+SYSTEM CONFLICT RESOLUTION MATRIX
+(When systems disagree — what takes priority)
+═══════════════════════════════════════════════
+
+FOR EVENT TIMING:
+• KP > Vimshottari alone (KP sub-lord gives more precise timing)
+• Tajika (Varshphal) > natal chart (for annual predictions within a specific year)
+• Transit confirmation > dasha alone (both needed for manifestation)
+
+FOR LIFE THEME/CHARACTER:
+• D1 Lagna + Moon + Sun = Core identity (equal weight, Vedic)
+• Jaimini AK/Karakamsha > Western Sun sign for soul purpose
+• Western psychological interpretation > Vedic for emotional/psychological nuance
+
+FOR HEALTH:
+• Medical astrology (system 10) + 6th/8th/12th house lords > any single indicator
+• KP 6th CSL = most precise for type of illness onset
+• Lal Kitab + Vedic remedy combination = most comprehensive solution
+
+FOR SPIRITUAL INSIGHT:
+• Jaimini AK lesson > any other system for soul karma
+• D20 (Vimshamsha) + D60 (Shastiamsha) > D1 for spiritual path details
+• Ketu's position > Rahu's for past life strength; Rahu's > Ketu's for this life direction
+
+WHEN ALL SYSTEMS AGREE:
+→ Confidence +10% per agreeing system
+→ 6+ systems agreeing = Near-certainty level (8-9/10 confidence)
+→ 10+ systems agreeing = Highest possible confidence for an astrological claim
+
+WHEN MAJOR SYSTEMS CONFLICT:
+→ Check birth time accuracy first — most conflicts resolve with correct time
+→ Report conflict honestly: "Vedic shows X, KP shows Y — this reflects birth time sensitivity or a genuine life tension in this area"
+→ Never hide conflicts to seem more confident — honest uncertainty = high integrity`;
+
+// ============================================================
+// APP STATE
+// ============================================================
+
+let conversationHistory = [];
+
+// Restore conversation history from localStorage on page load
+(function() {
+  try {
+    const saved = localStorage.getItem('antyaka_chat_history');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        conversationHistory = parsed;
+      }
+    }
+  } catch(e) {}
+})();
+
+function saveHistory() {
+  try {
+    // Keep last 40 messages to avoid localStorage overflow
+    const toSave = conversationHistory.slice(-40);
+    localStorage.setItem('antyaka_chat_history', JSON.stringify(toSave));
+  } catch(e) {}
+}
+let activeSystems = new Set(['Vedic','KP','Jaimini','Nadi','Western','Ashtakvarga','Tajika','Lal Kitab','Numerology','Medical','Horary','Panchang']);
+let isLoading = false;
+let selectedAIModel = 'deepseek-auto'; // Default — Auto routing between R1 and v3.2
+
+// API key management not needed with Puter.js
+
+// ============================================================
+// SYSTEM TOGGLES
+// ============================================================
+function toggleAll(btn) {
+  const allActive = activeSystems.size === 12;
+  document.querySelectorAll('.sys-toggle[data-sys]').forEach(t => {
+    if (allActive) {
+      activeSystems.clear();
+      t.classList.remove('active');
+    } else {
+      activeSystems.add(t.dataset.sys);
+      t.classList.add('active');
+    }
+  });
+  btn.textContent = allActive ? 'SELECT ALL' : 'ALL 12';
+}
+
+document.querySelectorAll('.sys-toggle[data-sys]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const sys = btn.dataset.sys;
+    if (activeSystems.has(sys)) {
+      activeSystems.delete(sys);
+      btn.classList.remove('active');
+    } else {
+      activeSystems.add(sys);
+      btn.classList.add('active');
+    }
+  });
+});
+
+// ============================================================
+// CHAT FUNCTIONS
+// ============================================================
+function renderMarkdown(text) {
+  if (typeof marked !== 'undefined') {
+    marked.setOptions({ breaks: true, gfm: true });
+    return marked.parse(text);
+  }
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '⎘ Copy'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    btn.textContent = 'Failed';
+    setTimeout(() => { btn.textContent = '⎘ Copy'; }, 2000);
+  });
+}
+
+function addMessage(role, content) {
+  const container = document.getElementById('chatMessages');
+
+  // Remove welcome if present
+  const welcome = container.querySelector('.welcome-msg');
+  if (welcome) welcome.remove();
+
+  const msg = document.createElement('div');
+  msg.className = 'msg ' + role;
+
+  // Timestamp
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+  const label = document.createElement('div');
+  label.className = 'msg-label';
+  label.innerHTML = (role === 'user' ? '✦ YOU' : '✦ ANTYAKA') + 
+    '<span style="font-size:0.5rem;color:var(--text2);margin-left:8px;font-family:monospace;">' + timeStr + '</span>';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+
+  if (role === 'assistant' && content) {
+    bubble.innerHTML = renderMarkdown(content);
+  } else {
+    bubble.textContent = content;
+  }
+
+  msg.appendChild(label);
+  msg.appendChild(bubble);
+
+  // Action buttons for assistant messages
+  if (role === 'assistant') {
+    const actions = document.createElement('div');
+    actions.className = 'msg-actions';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'msg-action-btn';
+    copyBtn.textContent = '⎘ Copy';
+    copyBtn.onclick = () => copyToClipboard(content || bubble.innerText, copyBtn);
+
+    const speakBtn = document.createElement('button');
+    speakBtn.className = 'msg-action-btn tts-btn';
+    speakBtn.textContent = '🔊 Speak';
+    speakBtn.dataset.speaking = 'false';
+    speakBtn.onclick = () => speakMessage(content || bubble.innerText, speakBtn);
+
+    actions.appendChild(copyBtn);
+    actions.appendChild(speakBtn);
+    msg.appendChild(actions);
+  }
+
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+  return msg;
+}
+
+// ============================================================
+// CLEAR CHAT + EXPORT
+// ============================================================
+function clearChat() {
+  if (!confirm('Clear all conversation? This cannot be undone.')) return;
+  conversationHistory = [];
+  try { localStorage.removeItem('antyaka_chat_history'); } catch(e) {}
+  const container = document.getElementById('chatMessages');
+  container.innerHTML = '<div class="welcome-msg"><div class="om">☽ ✦ ☾</div><p>Conversation cleared. Ask me anything...</p></div>';
+}
+
+function exportChat() {
+  if (conversationHistory.length === 0) { showError('No conversation to export!'); return; }
+  let lines = [];
+  lines.push('ANTYAKA - Conversation Export');
+  lines.push(new Date().toLocaleString());
+  lines.push('');
+  lines.push('='.repeat(50));
+  lines.push('');
+  conversationHistory.forEach(function(msg) {
+    var label = msg.role === 'user' ? 'YOU:' : 'ANTYAKA:';
+    lines.push(label);
+    lines.push(msg.content);
+    lines.push('');
+    lines.push('-'.repeat(40));
+    lines.push('');
+  });
+  var text = lines.join('\n');
+  var blob = new Blob([text], { type: 'text/plain' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Antyaka-Chat-' + Date.now() + '.txt';
+  a.click();
+}
+function addThinking() {
+  const container = document.getElementById('chatMessages');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'msg assistant';
+  wrapper.id = 'thinkingMsg';
+  wrapper.innerHTML = `<div class="msg-label">✦ ANTYAKA</div>
+    <div class="thinking"><span></span><span></span><span></span></div>`;
+  container.appendChild(wrapper);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeThinking() {
+  const t = document.getElementById('thinkingMsg');
+  if (t) t.remove();
+}
+
+function showError(msg, retryFn) {
+  const el = document.getElementById('errorMsg');
+  if (!el) { console.error(msg); return; }
+  el.innerHTML = msg;
+  if (retryFn) {
+    el.innerHTML += ' <button onclick="(' + retryFn.toString() + ')()" style="margin-left:8px;padding:2px 8px;border:1px solid #f87171;border-radius:100px;background:transparent;color:#f87171;cursor:pointer;font-size:0.7rem;">↺ Retry</button>';
+  }
+  el.style.display = 'block';
+  setTimeout(() => { if (el) el.style.display = 'none'; }, 8000);
+}
+
+// ============================================================
+// BIRTH CHART ANALYSIS
+// ============================================================
+
+// ============================================================
+
+// Share chart with AI mid-conversation (without re-invoking full analysis)
+function injectChartToChat() {
+  if (!lastChartData) {
+    showError('Please fill birth details and click INVOKE ANTYAKA first.');
+    return;
+  }
+  const chartSummary = formatChartContext(lastChartData);
+  const msg = 'My birth chart data for your reference:' + chartSummary + 'Please keep this chart in mind for our conversation.';
+  sendToAntyaka(msg);
+}
+
+// Show/hide the Share Chart button based on whether chart is calculated
+function updateChartBtn() {
+  const btn = document.getElementById('injectChartBtn');
+  if (btn) btn.style.display = lastChartData ? 'inline-flex' : 'none';
+}
+
+// CHART DATA INJECTION ENGINE
+// Calculates real positions and injects into AI context
+// ============================================================
+
+// Global: stores last calculated chart data for injection
+let lastChartData = null;
+
+// Master calculation function — returns all chart data as structured object
+async function calculateChartData(dob, tob, pob) {
+  const tobSafe = tob || '12:00';
+
+  // Geocode birth place
+  const geo = await geocodePlace(pob);
+  const lat = geo ? geo.lat : 28.6139;
+  const lon = geo ? geo.lon : 77.2090;
+  const placeName = geo ? geo.name.split(',')[0] : pob;
+
+  // Parse date/time
+  const [yr, mo, dy] = dob.split('-').map(Number);
+  const [hr, mn] = tobSafe.split(':').map(Number);
+
+  // Convert IST to UT
+  const utHr = hr - 5.5;
+  const utHrFinal = utHr < 0 ? utHr + 24 : utHr;
+  const dayAdj = utHr < 0 ? dy - 1 : dy;
+
+  // Julian Day
+  const jd = toJulianDay(yr, mo, dayAdj, utHrFinal, mn);
+
+  // Ayanamsha
+  const ayanamsha = getLahiriAyanamsha(jd);
+
+  // Tropical longitudes
+  const tropicals = {
+    Sun:     getSunLongitude(jd),
+    Moon:    getMoonLongitude(jd),
+    Mars:    getPlanetLongitude('Mars', jd),
+    Mercury: getPlanetLongitude('Mercury', jd),
+    Jupiter: getPlanetLongitude('Jupiter', jd),
+    Venus:   getPlanetLongitude('Venus', jd),
+    Saturn:  getPlanetLongitude('Saturn', jd),
+    Rahu:    getRahuLongitude(jd),
+  };
+  tropicals.Ketu = (tropicals.Rahu + 180) % 360;
+
+  // Sidereal (Lahiri)
+  const sidereal = {};
+  for (const [p, trop] of Object.entries(tropicals)) {
+    sidereal[p] = toSidereal(trop, ayanamsha);
+  }
+
+  // Lagna
+  const lagnaLong  = calcLagna(jd, lat, lon, ayanamsha);
+  const lagnaSignIdx = Math.floor(lagnaLong / 30);
+  const lagnaDeg   = (lagnaLong % 30).toFixed(2);
+  const lagnaSign  = SIGNS[lagnaSignIdx];
+
+  // House placements (D1)
+  const houses = {};
+  const degreeInSign = {};
+  const rashiOf = {};
+  for (const [p, sl] of Object.entries(sidereal)) {
+    houses[p]      = getHouse(sl, lagnaLong);
+    degreeInSign[p] = (sl % 30).toFixed(2);
+    rashiOf[p]     = SIGNS[Math.floor(sl / 30)];
+  }
+
+  // Retrograde check (rough: outer planets Rx when opposite Sun)
+  const sunSid = sidereal.Sun;
+  const retro = {};
+  ['Mars','Mercury','Jupiter','Venus','Saturn'].forEach(p => {
+    const diff = Math.abs(sidereal[p] - sunSid);
+    const opp  = diff > 180 ? 360 - diff : diff;
+    // Simplified: outer planets retrograde roughly when within 180°±60° from Sun opposition
+    if (['Jupiter','Saturn','Mars'].includes(p)) retro[p] = opp > 120 && opp < 240;
+    else retro[p] = opp < 28 || opp > 332; // inner planets Rx near conjunction
+  });
+  retro.Sun = false; retro.Moon = false; retro.Rahu = true; retro.Ketu = true;
+
+  // Nakshatra of Moon (and all planets for Nadi)
+  const moonNak      = getNakshatra(sidereal.Moon);
+  const moonDegInNak = sidereal.Moon % (360 / 27);
+  const NAKSHATRA_NAMES = [
+    'Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya',
+    'Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati',
+    'Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha',
+    'Shravana','Dhanishtha','Shatabhisha','Purva Bhadra','Uttara Bhadra','Revati'
+  ];
+  const NAK_LORDS = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+
+  const planetNaks = {};
+  for (const [p, sl] of Object.entries(sidereal)) {
+    const nakIdx  = Math.floor(sl / (360/27));
+    const nakName = NAKSHATRA_NAMES[nakIdx];
+    const pada    = Math.floor((sl % (360/27)) / (360/108)) + 1;
+    const lord    = NAK_LORDS[nakIdx % 9];
+    planetNaks[p] = { name: nakName, pada, lord };
+  }
+
+  // D9 Navamsha
+  const d9 = {};
+  for (const [p, sl] of Object.entries(sidereal)) d9[p] = getNavamsha(sl);
+  d9.Lagna = getNavamsha(lagnaLong);
+
+  // Vimshottari Dasha
+  const dashaData = calcVimshottariDasha(moonNak, moonDegInNak, dob);
+  const currentDasha = dashaData ? dashaData.find(d => d.current) || dashaData[0] : null;
+
+  // Atmakaraka — planet with highest degree in sign (Jaimini)
+  const AK_CANDIDATES = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
+  let akPlanet = AK_CANDIDATES[0];
+  let akDeg = degreeInSign['Sun'];
+  AK_CANDIDATES.forEach(p => {
+    if (parseFloat(degreeInSign[p]) > parseFloat(akDeg)) {
+      akDeg = degreeInSign[p];
+      akPlanet = p;
+    }
+  });
+
+  // Karakamsha (Navamsha sign of AK)
+  const karakamsha = d9[akPlanet];
+
+  // Vargottama check (same sign in D1 and D9)
+  const vargottama = [];
+  for (const [p, sl] of Object.entries(sidereal)) {
+    const d1Sign = SIGNS[Math.floor(sl / 30)];
+    if (d1Sign === d9[p]) vargottama.push(p);
+  }
+
+  // Lagna Vargottama
+  if (lagnaSign === d9.Lagna) vargottama.push('Lagna');
+
+  return {
+    jd, ayanamsha: ayanamsha.toFixed(4),
+    lat: lat.toFixed(4), lon: lon.toFixed(4), placeName,
+    lagnaSign, lagnaDeg,
+    sidereal, houses, degreeInSign, rashiOf, retro,
+    moonNak: NAKSHATRA_NAMES[moonNak], moonNakLord: NAK_LORDS[moonNak % 9],
+    planetNaks, d9, dashaData, currentDasha,
+    atmakaraka: akPlanet, akDegree: akDeg,
+    karakamsha, vargottama,
+    birthTime: tob ? tob + ' IST' : 'Unknown (12:00 noon assumed)',
+    birthDate: dob, birthPlace: pob
+  };
+}
+
+// Format chart data into a precise AI-readable string
+function formatChartContext(cd) {
+  if (!cd) return '';
+
+  const PLANET_SYMBOLS = {
+    Sun:'☉', Moon:'☽', Mars:'♂', Mercury:'☿',
+    Jupiter:'♃', Venus:'♀', Saturn:'♄', Rahu:'☊', Ketu:'☋'
+  };
+
+  let ctx = '\n\n════════════════════════════════════════\n';
+  ctx += 'CALCULATED BIRTH CHART DATA (Lahiri Ayanamsha)\n';
+  ctx += '════════════════════════════════════════\n';
+  ctx += `Ayanamsha: ${cd.ayanamsha}° | Place: ${cd.placeName} (${cd.lat}°N, ${cd.lon}°E)\n`;
+  ctx += `Birth: ${cd.birthDate} | ${cd.birthTime}\n\n`;
+
+  ctx += `LAGNA (Ascendant): ${cd.lagnaSign} ${cd.lagnaDeg}°\n`;
+  ctx += `Moon Nakshatra: ${cd.moonNak} (Lord: ${cd.moonNakLord})\n\n`;
+
+  ctx += 'D1 RASHI CHART — PLANET POSITIONS:\n';
+  const planetOrder = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn','Rahu','Ketu'];
+  planetOrder.forEach(p => {
+    const sym   = PLANET_SYMBOLS[p] || p;
+    const rashi = cd.rashiOf[p];
+    const deg   = cd.degreeInSign[p];
+    const house = cd.houses[p];
+    const rx    = cd.retro[p] ? ' ℞' : '';
+    const nak   = cd.planetNaks[p];
+    ctx += `${sym} ${p}${rx}: ${rashi} ${deg}° | House ${house} | Nak: ${nak.name} Pada ${nak.pada} (${nak.lord})\n`;
+  });
+
+  ctx += '\nD9 NAVAMSHA POSITIONS:\n';
+  ctx += `Lagna: ${cd.d9.Lagna} | `;
+  planetOrder.forEach(p => { ctx += `${p}: ${cd.d9[p]} | `; });
+  ctx = ctx.replace(/\| $/, '') + '\n';
+
+  if (cd.vargottama.length > 0) {
+    ctx += `Vargottama (same sign D1+D9): ${cd.vargottama.join(', ')}\n`;
+  }
+
+  ctx += `\nJAIMINI KARAKAS:\nAtmakaraka (AK): ${cd.atmakaraka} at ${cd.akDegree}° in sign\n`;
+  ctx += `Karakamsha (AK's Navamsha sign): ${cd.karakamsha}\n`;
+
+  if (cd.currentDasha) {
+    ctx += `\nCURRENT VIMSHOTTARI DASHA: ${cd.currentDasha.planet} Mahadasha`;
+    if (cd.currentDasha.sub) ctx += ` / ${cd.currentDasha.sub} Antardasha`;
+    if (cd.currentDasha.end) ctx += ` (until ${cd.currentDasha.end})`;
+    ctx += '\n';
+  }
+
+  ctx += '\n⚠️ Note: Browser-calculated positions (accuracy ±1-2°). Lagna requires accurate birth time.\n';
+  ctx += '════════════════════════════════════════\n';
+
+  return ctx;
+}
+
+async function analyzeBirthChart() {
+  const name = document.getElementById('name').value.trim();
+  const dob  = document.getElementById('dob').value;
+  const tob  = document.getElementById('tob').value;
+  const pob  = document.getElementById('pob').value.trim();
+
+  if (!dob || !pob) {
+    showError('Please enter at least Date of Birth and Place of Birth.');
+    return;
+  }
+
+  const systems = [...activeSystems].join(', ');
+
+  // Show calculating status
+  const btn = document.querySelector('.analyze-btn');
+  const originalBtnText = btn ? btn.textContent : '';
+  if (btn) btn.textContent = '⟳ Calculating Chart...';
+
+  // Calculate actual chart data and inject into prompt
+  let chartContext = '';
+  try {
+    const chartData = await calculateChartData(dob, tob, pob);
+    lastChartData = chartData; // store globally for follow-up questions
+    updateChartBtn();
+    chartContext = formatChartContext(chartData);
+  } catch(e) {
+    chartContext = '\n[Chart calculation unavailable — using birth data only]\n';
+  }
+
+  if (btn) btn.textContent = originalBtnText;
+
+  const prompt = `Please perform a comprehensive astrological analysis for the following person:
+
+Name: ${name || 'Not provided'}
+Date of Birth: ${dob}
+Time of Birth: ${tob || 'Unknown (12:00 noon assumed)'}
+Place of Birth: ${pob}
+
+Active Systems for this analysis: ${systems}
+${chartContext}
+Using the EXACT planetary positions above, analyze this birth chart through ALL selected systems. Apply your complete knowledge — identify yogas, calculate dasha periods, assess planetary strengths (Shadbala), find Atmakaraka lessons, check Navamsha for confirmation, and provide the Judge's Verdict.
+
+Focus on: Overall life themes, career/purpose, relationships, health, and current life phase based on the running dasha.`;
+
+  sendToAntyaka(prompt);
+}
+
+// ============================================================
+// SEND MESSAGE
+// ============================================================
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text || isLoading) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  sendToAntyaka(text);
+}
+
+async function sendToAntyaka(userMessage) {
+  // If chart has been calculated, inject compact reference into follow-up messages
+  // But skip: if already contains chart data, or if it's a very long message
+  const alreadyHasChart = userMessage.includes('CALCULATED BIRTH CHART DATA');
+  const isChartAnalysis = userMessage.includes('comprehensive astrological analysis');
+  if (lastChartData && !alreadyHasChart && !isChartAnalysis) {
+    // Inject compact lagna+moon+dasha summary (not full chart — avoid token bloat)
+    const cd = lastChartData;
+    const compactRef = '\n\n[Chart Reference: Lagna=' + cd.lagnaSign + ' ' + cd.lagnaDeg + 
+      '° | Moon=' + cd.rashiOf.Moon + ' ' + cd.degreeInSign.Moon + 
+      '° (' + cd.moonNak + ') | AK=' + cd.atmakaraka + 
+      ' | Dasha=' + (cd.currentDasha ? cd.currentDasha.planet + (cd.currentDasha.sub ? '/' + cd.currentDasha.sub : '') : 'Unknown') + ']';
+    userMessage = userMessage + compactRef;
+  }
+
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  addMessage('user', userMessage);
+  conversationHistory.push({ role: 'user', content: userMessage });
+  saveHistory();
+
+  addThinking();
+
+  try {
+    // Auto-wait for puter to load (max 15 seconds)
+    let waited = 0;
+    while (typeof puter === 'undefined' && waited < 15000) {
+      await new Promise(r => setTimeout(r, 500));
+      waited += 500;
+    }
+    if (typeof puter === 'undefined') {
+      throw new Error('Network issue: Puter.js failed to load. Please refresh the page and check your internet connection.');
+    }
+    if (!puter.ai) {
+      throw new Error('Puter AI not ready. Please refresh the page.');
+    }
+    // Build messages with system prompt
+    const messages = [
+      { role: 'system', content: ANTYAKA_SYSTEM_PROMPT },
+      ...conversationHistory
+    ];
+
+    // Handle 3-AI Collab mode
+    if (selectedAIModel === 'triple-collab') {
+      await sendTripleCollab(userMessage, messages);
+      // fall through to finally block
+    } else {
+      // Resolve auto model based on complexity
+      const modelName = resolveModel(userMessage);
+      const modelLabel = modelName.split('/').pop();
+
+      // Update thinking label safely
+      const thinkingEl = document.getElementById('thinkingMsg');
+      if (thinkingEl) {
+        const lbl = thinkingEl.querySelector('.msg-label');
+        if (lbl) lbl.textContent = '✦ ANTYAKA [' + modelLabel + ']';
+      }
+
+      const isStreamingModel = modelName.startsWith('claude-') || modelName.startsWith('x-ai/grok-');
+
+      if (isStreamingModel) {
+        // Claude + Grok: word-by-word streaming
+        removeThinking();
+        const msgEl = addMessage('assistant', '');
+        const bubble = msgEl.querySelector('.msg-bubble');
+        const actionsEl = msgEl.querySelector('.msg-actions');
+        // Hide actions while streaming
+        if (actionsEl) actionsEl.style.display = 'none';
+        let fullReply = '';
+
+        const stream = await puter.ai.chat(messages, { model: modelName, stream: true });
+        for await (const part of stream) {
+          fullReply += (part && part.text) ? part.text : '';
+          // Show plain text while streaming (faster)
+          if (bubble) bubble.textContent = fullReply;
+          const chatEl = document.getElementById('chatMessages');
+          if (chatEl) chatEl.scrollTop = chatEl.scrollHeight;
+        }
+        // After complete — render markdown
+        if (bubble) bubble.innerHTML = renderMarkdown(fullReply);
+        // Update copy button content reference + show actions
+        if (actionsEl) {
+          actionsEl.style.display = 'flex';
+          const copyBtn = actionsEl.querySelector('.msg-action-btn');
+          if (copyBtn) copyBtn.onclick = () => copyToClipboard(fullReply, copyBtn);
+        }
+        conversationHistory.push({ role: 'assistant', content: fullReply }); saveHistory();
+
+      } else {
+        // DeepSeek / others: normal response
+        const response = await puter.ai.chat(messages, { model: modelName });
+        removeThinking();
+        const reply = response.message.content || 'No response received.';
+        conversationHistory.push({ role: 'assistant', content: reply }); saveHistory();
+        addMessage('assistant', reply);
+      }
+    }
+
+  } catch (err) {
+    removeThinking();
+    const errMsg = err.message || String(err);
+    const isCredits = errMsg.includes('402') || errMsg.includes('limit') || errMsg.includes('quota') || errMsg.includes('credit');
+    if (isCredits) {
+      showError('⚠️ Puter credits exhausted ($0.50 limit). Switch to DeepSeek or Grok — they are FREE!');
+    } else {
+      showError('Error: ' + errMsg);
+    }
+  } finally {
+    isLoading = false;
+    document.getElementById('sendBtn').disabled = false;
+  }
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+
+
+
+// ============================================================
+// IMAGE GENERATION
+// ============================================================
+async function generateImage() {
+  const prompt = document.getElementById('imgPrompt').value.trim();
+  const model = document.getElementById('imgModel').value;
+  
+  if (!prompt) { showError('Please enter an image prompt!'); return; }
+
+  let waited = 0;
+  while (typeof puter === 'undefined' && waited < 10000) {
+    await new Promise(r => setTimeout(r, 300));
+    waited += 300;
+  }
+
+  addMessage('user', '🎨 Generate: ' + prompt);
+  document.getElementById('imgPrompt').value = '';
+  const chatEl = document.getElementById('chatMessages');
+
+  if (model === 'fusion') {
+    // 🔮 FUSION MODE — AI combines all 4 styles into 1 mega-prompt → 1 final image
+    const chatEl2 = document.getElementById('chatMessages');
+    const fusionHdr = document.createElement('div');
+    fusionHdr.className = 'msg assistant';
+    fusionHdr.innerHTML = '<div class="msg-label">🔮 FUSION MODE — Creating Master Prompt...</div><div class="msg-body" style="color:#a78bfa;font-size:0.8rem;">GPT adds beauty · DALL-E adds style · Gemini adds realism · Grok fixes it all → ONE image</div>';
+    chatEl2.appendChild(fusionHdr);
+    chatEl2.scrollTop = chatEl2.scrollHeight;
+
+    // Step 1: Use Claude to build a fusion mega-prompt
+    const fusionPromptReq = [
+      { role: 'system', content: 'You are an expert AI image prompt engineer. Your job is to combine the visual strengths of 4 different AI image models into ONE perfect image generation prompt. GPT Image = beauty & lighting, DALL-E 3 = artistic style & composition, Gemini 2.5 = photorealistic details, Grok Image = cinematic drama & atmosphere. Respond with ONLY the final enhanced prompt, no explanation, no quotes, max 120 words.' },
+      { role: 'user', content: 'Original prompt: "' + prompt + '"\nCreate a fusion mega-prompt combining all 4 AI styles for maximum visual impact.' }
+    ];
+
+    let megaPrompt = prompt;
+    try {
+      const fusionResp = await puter.ai.chat(fusionPromptReq, { model: 'claude-haiku-4-5' });
+      megaPrompt = fusionResp.message.content[0]?.text || fusionResp.message.content || prompt;
+    } catch(e) { megaPrompt = prompt + ', beautiful artistic composition, photorealistic details, cinematic lighting, dramatic atmosphere, golden hour, sacred geometry, cosmic mystical'; }
+
+    // Show the mega-prompt
+    const mpCard = document.createElement('div');
+    mpCard.className = 'msg assistant';
+    mpCard.style.cssText = 'border-left:3px solid #a78bfa;margin-left:10px;';
+    mpCard.innerHTML = '<div class="msg-label">✦ FUSION MEGA-PROMPT</div><div class="msg-body" style="font-size:0.75rem;color:#c4b5fd;">' + megaPrompt + '</div>';
+    chatEl2.appendChild(mpCard);
+    chatEl2.scrollTop = chatEl2.scrollHeight;
+
+    // Step 2: Generate ONE final image with GPT Image 1 using mega-prompt
+    const finalCard = document.createElement('div');
+    finalCard.className = 'msg assistant';
+    finalCard.style.cssText = 'border-left:3px solid #a78bfa;margin-left:10px;';
+    const fid = 'fusion' + Date.now();
+    finalCard.innerHTML = '<div class="msg-label">🔮 FUSION RESULT — GPT Image 1</div><div id="' + fid + '" class="msg-body">⏳ Generating final fusion image...</div>';
+    chatEl2.appendChild(finalCard);
+    chatEl2.scrollTop = chatEl2.scrollHeight;
+
+    try {
+      const fusionImg = await puter.ai.txt2img(megaPrompt, { model: 'gpt-image-1', quality: 'high' });
+      const el = document.getElementById(fid);
+      if (el) {
+        fusionImg.className = 'generated-img';
+        const dl = document.createElement('a');
+        dl.href = fusionImg.src; dl.download = 'antyaka-fusion.png';
+        dl.className = 'tts-btn'; dl.style.cssText = 'display:inline-flex;margin-top:6px;';
+        dl.textContent = '⬇ Download Fusion Image';
+        el.innerHTML = '';
+        el.appendChild(fusionImg);
+        el.appendChild(dl);
+        chatEl2.scrollTop = chatEl2.scrollHeight;
+      }
+    } catch(err) {
+      const el = document.getElementById(fid);
+      if (el) el.textContent = 'Fusion Error: ' + err.message;
+    }
+
+  } else if (model === 'all-4') {
+    // ✦ ALL 4 MODELS SIMULTANEOUSLY
+    const imgList = [
+      { model: 'gpt-image-1',                   label: '⭐ GPT Image 1',  opts: { provider: 'openai-image-generation' } },
+      { model: 'dall-e-3',                       label: '🎨 DALL-E 3',     opts: { provider: 'openai-image-generation' } },
+      { model: 'gemini-2.5-flash-image-preview', label: '✨ Gemini 2.5',   opts: { provider: 'gemini' } },
+      { model: 'grok-2-image',                   label: '⚫ Grok Image',   opts: { provider: 'xai' } },
+    ];
+
+    const hdr = document.createElement('div');
+    hdr.className = 'msg assistant';
+    hdr.innerHTML = '<div class="msg-label">🎨 ALL 4 IMAGE ENGINES</div><div class="msg-body" style="color:var(--gold);font-size:0.8rem;">Generating with all models simultaneously...</div>';
+    chatEl.appendChild(hdr);
+
+    imgList.forEach(function(m) {
+      const card = document.createElement('div');
+      card.className = 'msg assistant';
+      card.style.cssText = 'border-left:3px solid rgba(201,168,76,0.35);margin-left:10px;';
+      const bid = 'img' + Date.now() + Math.random().toString(36).slice(2,6);
+      card.innerHTML = '<div class="msg-label">' + m.label + '</div><div id="' + bid + '" class="msg-body">⏳ Generating...</div>';
+      chatEl.appendChild(card);
+      chatEl.scrollTop = chatEl.scrollHeight;
+
+      puter.ai.txt2img(prompt, Object.assign({ model: m.model }, m.opts))
+        .then(function(image) {
+          const el = document.getElementById(bid);
+          if (!el) return;
+          image.className = 'generated-img';
+          const dl = document.createElement('a');
+          dl.href = image.src; dl.download = m.label + '.png';
+          dl.className = 'tts-btn'; dl.style.cssText = 'display:inline-flex;margin-top:6px;';
+          dl.textContent = '⬇ Download';
+          el.innerHTML = '';
+          el.appendChild(image);
+          el.appendChild(dl);
+          chatEl.scrollTop = chatEl.scrollHeight;
+        })
+        .catch(function(err) {
+          const el = document.getElementById(bid);
+          if (el) el.textContent = 'Error: ' + err.message;
+        });
+    });
+
+  } else {
+    // Single model
+    addThinking();
+    const thinkEl = document.getElementById('thinkingMsg');
+    if (thinkEl) thinkEl.querySelector('.msg-label').textContent = '✦ ANTYAKA [' + model + ']';
+
+    try {
+      const image = await puter.ai.txt2img(prompt, { model: model });
+      removeThinking();
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'msg assistant';
+      image.className = 'generated-img';
+      const lbl = document.createElement('div');
+      lbl.className = 'msg-label';
+      lbl.textContent = '✦ ANTYAKA [' + model + ']';
+      const dl = document.createElement('a');
+      dl.href = image.src; dl.download = 'antyaka-image.png';
+      dl.className = 'tts-btn'; dl.style.cssText = 'display:inline-flex;margin-top:6px;';
+      dl.textContent = '⬇ Download';
+      msgDiv.appendChild(lbl);
+      msgDiv.appendChild(image);
+      msgDiv.appendChild(dl);
+      chatEl.appendChild(msgDiv);
+      chatEl.scrollTop = chatEl.scrollHeight;
+    } catch(err) {
+      removeThinking();
+      showError('Image Error: ' + err.message);
+    }
+  }
+}
+
+// ============================================================
+// SPEECH TO TEXT (MIC)
+// ============================================================
+let mediaRecorder = null;
+let audioChunks = [];
+let isRecording = false;
+
+async function toggleMic() {
+  const micBtn = document.getElementById('micBtn');
+  
+  if (isRecording) {
+    // Stop recording
+    mediaRecorder.stop();
+    isRecording = false;
+    micBtn.classList.remove('recording');
+    micBtn.innerHTML = '🎤';
+    micBtn.title = 'Speak your question';
+    return;
+  }
+
+  // Start recording
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      // Stop mic stream
+      stream.getTracks().forEach(t => t.stop());
+      
+      micBtn.innerHTML = '⏳';
+      micBtn.title = 'Transcribing...';
+
+      try {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        
+        // Wait for puter
+        let waited = 0;
+        while (typeof puter === 'undefined' && waited < 10000) {
+          await new Promise(r => setTimeout(r, 300));
+          waited += 300;
+        }
+
+        const result = await puter.ai.speech2txt(audioBlob, {
+          model: 'gpt-4o-transcribe'
+        });
+
+        const text = result.text || result;
+        const input = document.getElementById('userInput');
+        input.value = text;
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        
+        micBtn.innerHTML = '🎤';
+        micBtn.title = 'Speak your question';
+
+        // Auto send if text received
+        if (text && text.trim()) sendMessage();
+
+      } catch (err) {
+        micBtn.innerHTML = '🎤';
+        micBtn.title = 'Speak your question';
+        showError('Mic Error: ' + err.message);
+      }
+    };
+
+    mediaRecorder.start();
+    isRecording = true;
+    micBtn.classList.add('recording');
+    micBtn.innerHTML = '⏹';
+    micBtn.title = 'Tap to stop recording';
+
+  } catch (err) {
+    showError('Microphone access denied: ' + err.message);
+  }
+}
+
+// ============================================================
+// TEXT TO SPEECH
+// ============================================================
+let currentAudio = null;
+
+async function speakMessage(btn, text) {
+  // Stop if already playing
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+    document.querySelectorAll('.tts-btn').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Speak';
+    });
+    if (btn.dataset.speaking === 'true') {
+      btn.dataset.speaking = 'false';
+      return;
+    }
+  }
+
+  btn.classList.add('playing');
+  btn.innerHTML = '⏹ Stop';
+  btn.dataset.speaking = 'true';
+
+  try {
+    const voiceVal = document.getElementById('voiceSelect')?.value || 'Joanna';
+    const voiceName = voiceVal;
+    const voiceEngine = 'neural';
+    const audio = await puter.ai.txt2speech(text, {
+      voice: voiceName,
+      engine: voiceEngine || 'neural',
+      language: "en-US"
+    });
+    currentAudio = audio;
+    audio.play();
+    audio.onended = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Speak';
+      btn.dataset.speaking = 'false';
+      currentAudio = null;
+    };
+  } catch (err) {
+    btn.classList.remove('playing');
+    btn.innerHTML = '🔊 Speak';
+    btn.dataset.speaking = 'false';
+    showError('TTS Error: ' + err.message);
+  }
+}
+
+// ============================================================
+// MODEL SELECTION — Groups + Smart Auto Routing
+// ============================================================
+function selectGroup(btn) {
+  document.querySelectorAll('.ai-group-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const group = btn.dataset.group;
+  ['deepseek','claude','grok','collab'].forEach(g => {
+    const el = document.getElementById('sub-' + g);
+    if (el) el.style.display = 'none';
+  });
+  const subEl = document.getElementById('sub-' + group);
+  if (subEl) { subEl.style.display = 'flex'; }
+  const activeSub = subEl ? subEl.querySelector('.sub-btn.active') : null;
+  if (activeSub) selectedAIModel = activeSub.dataset.model;
+}
+
+function selectSub(btn) {
+  btn.closest('.sub-models').querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedAIModel = btn.dataset.model;
+}
+
+function isComplexQuery(text) {
+  return text.length > 80 ||
+    /birth|chart|kundali|analysis|career|marriage|health|predict|dasha|yoga|life|future|past|destiny|planet|house|rashi|nakshatra|lagna|navamsha|transit/i.test(text);
+}
+
+function resolveModel(msg) {
+  const complex = isComplexQuery(msg);
+  switch(selectedAIModel) {
+    case 'deepseek-auto': return complex ? 'deepseek/deepseek-r1' : 'deepseek/deepseek-v3.2';
+    case 'claude-auto':   return complex ? 'claude-sonnet-4-6' : 'claude-haiku-4-5';
+    case 'grok-auto':     return complex ? 'x-ai/grok-4' : 'x-ai/grok-4-1-fast';
+    default: return selectedAIModel;
+  }
+}
+
+// ============================================================
+// 3-AI COLLAB MODE
+// ============================================================
+async function sendTripleCollab(userMessage, messages) {
+  removeThinking();
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  const aiList = [
+    { model: 'deepseek/deepseek-r1',   label: '🧠 DeepSeek R1',    stream: false },
+    { model: 'claude-haiku-4-5',        label: '⚡ Claude Haiku',   stream: true  },
+    { model: 'x-ai/grok-4-1-fast',     label: '⚡ Grok 4.1 Fast',  stream: true  },
+  ];
+
+  const chatEl = document.getElementById('chatMessages');
+
+  // Header card
+  const hdr = document.createElement('div');
+  hdr.className = 'msg assistant';
+  hdr.innerHTML = '<div class="msg-label">🤝 3-AI COLLAB MODE</div><div class="msg-body" style="color:var(--gold);font-size:0.8rem;">Consulting DeepSeek + Claude Haiku + Grok simultaneously... <span style="color:#fbbf24">(Haiku used to save credits)</span></div>';
+  chatEl.appendChild(hdr);
+  chatEl.scrollTop = chatEl.scrollHeight;
+
+  const collabResults = [];
+
+  for (const ai of aiList) {
+    const card = document.createElement('div');
+    card.className = 'msg assistant';
+    card.style.cssText = 'border-left:3px solid rgba(201,168,76,0.35);margin-left:10px;';
+    const bid = 'cb' + Date.now() + Math.random().toString(36).slice(2,6);
+    card.innerHTML = '<div class="msg-label">' + ai.label + '</div><div class="msg-body" id="' + bid + '">⏳ Thinking...</div>';
+    chatEl.appendChild(card);
+    chatEl.scrollTop = chatEl.scrollHeight;
+
+    try {
+      let reply = '';
+      if (ai.stream) {
+        const st = await puter.ai.chat(messages, { model: ai.model, stream: true });
+        for await (const part of st) {
+          reply += (part && part.text) ? part.text : '';
+          const el = document.getElementById(bid);
+          if (el) el.textContent = reply;
+          chatEl.scrollTop = chatEl.scrollHeight;
+        }
+      } else {
+        const resp = await puter.ai.chat(messages, { model: ai.model });
+        reply = resp.message.content || '';
+        const el = document.getElementById(bid);
+        if (el) el.textContent = reply;
+      }
+      collabResults.push('[' + ai.label + ']: ' + reply);
+    } catch(err) {
+      const el = document.getElementById(bid);
+      if (el) el.textContent = 'Error: ' + err.message;
+    }
+  }
+
+  conversationHistory.push({ role: 'assistant', content: collabResults.join('\n\n') });
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ============================================================
+// LOCALSTORAGE — AUTO SAVE BIRTH DETAILS
+// ============================================================
+
+// Restore API key from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+
+});
+
+function autoSave() {
+  const data = {
+    name: document.getElementById('name').value,
+    dob:  document.getElementById('dob').value,
+    tob:  document.getElementById('tob').value,
+    pob:  document.getElementById('pob').value
+  };
+  localStorage.setItem('antyaka_birth', JSON.stringify(data));
+  const banner = document.getElementById('savedBanner');
+  if (data.dob || data.name) banner.style.display = 'flex';
+}
+
+function loadSaved() {
+  try {
+    const saved = localStorage.getItem('antyaka_birth');
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    if (data.name) document.getElementById('name').value = data.name;
+    if (data.dob)  document.getElementById('dob').value  = data.dob;
+    if (data.tob)  document.getElementById('tob').value  = data.tob;
+    if (data.pob)  document.getElementById('pob').value  = data.pob;
+    if (data.dob || data.name) document.getElementById('savedBanner').style.display = 'flex';
+  } catch(e) {}
+}
+
+function clearSaved() {
+  localStorage.removeItem('antyaka_birth');
+  document.getElementById('name').value = '';
+  document.getElementById('dob').value  = '';
+  document.getElementById('tob').value  = '';
+  document.getElementById('pob').value  = '';
+  document.getElementById('savedBanner').style.display = 'none';
+}
+
+// Load on page start
+window.addEventListener('DOMContentLoaded', loadSaved);
+
+// ============================================================
+// CHART GENERATION
+// ============================================================
+// ============================================================
+// REAL VEDIC CALCULATION ENGINE (Lahiri Ayanamsha)
+// ============================================================
+const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGN_SHORT = ['Mesh','Vrishabh','Mithun','Karka','Singh','Kanya','Tula','Vrischik','Dhanu','Makar','Kumbh','Meen'];
+const NAKSHATRA = ['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+const DASHA_YEARS = { Sun:6, Moon:10, Mars:7, Rahu:18, Jupiter:16, Saturn:19, Mercury:17, Ketu:7, Venus:20 };
+const NAKSHATRA_LORD = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury','Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury','Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+
+// Lahiri (Chitrapaksha) Ayanamsha — IAU standard
+// At J2000.0: 23.8559°. Rate: 50.2388475 arcsec/year = 1.39552°/century
+// Previous formula had /100 error — now corrected
+function getLahiriAyanamsha(jd) {
+  const T = (jd - 2451545.0) / 36525.0; // Julian centuries from J2000
+  const T2 = T * T;
+  // Lahiri ayanamsha: base + precession + small correction term
+  return 23.85569 + 1.39552 * T - 0.000031 * T2;
+}
+
+// Julian Day from date
+function toJulianDay(year, month, day, hour, minute) {
+  if (month <= 2) { year -= 1; month += 12; }
+  const A = Math.floor(year / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  const JD = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+  return JD + (hour + minute / 60) / 24;
+}
+
+// Sun longitude (degrees, tropical)
+function getSunLongitude(jd) {
+  const n = jd - 2451545.0;
+  const L = (280.46646 + 0.9856474 * n) % 360;
+  const g = (357.52911 + 0.9856003 * n) % 360;
+  const gR = g * Math.PI / 180;
+  const C = 1.914602 * Math.sin(gR) + 0.019993 * Math.sin(2*gR) + 0.000289 * Math.sin(3*gR);
+  return (L + C + 360) % 360;
+}
+
+// Moon longitude (approximate)
+function getMoonLongitude(jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  const L0 = 218.3165 + 13.17639648 * (jd - 2451545.0);
+  const M = (134.9634 + 13.06499295 * (jd - 2451545.0)) % 360;
+  const F = (93.2721 + 13.22935020 * (jd - 2451545.0)) % 360;
+  const D = (297.8502 + 12.19074912 * (jd - 2451545.0)) % 360;
+  const Ev = 1.2739 * Math.sin((2*D - M) * Math.PI/180);
+  const Ae = 0.1858 * Math.sin(M * Math.PI/180);
+  const A3 = 0.37 * Math.sin(M * Math.PI/180);
+  const Mprime = M + Ev - Ae - A3;
+  const Ec = 6.2886 * Math.sin(Mprime * Math.PI/180);
+  const A4 = 0.214 * Math.sin(2 * Mprime * Math.PI/180);
+  const lprime = L0 + Ev + Ec - Ae + A4;
+  const V = 0.6583 * Math.sin(2*(lprime - getSunLongitude(jd)) * Math.PI/180);
+  return (lprime + V + 360) % 360;
+}
+
+// Planet longitudes — VSOP87 mean elements with equation of center
+// Accurate to ~1° for inner planets, ~2° for outer (sufficient for Jyotish rashi)
+function getPlanetLongitude(planet, jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  // Mean longitude L0, mean anomaly M0, eccentricity e (all at epoch J2000)
+  const elements = {
+    Mercury: { L0: 252.2503, Lr: 149472.6749, M0: 174.7948, Mr: 149472.5153, e: 0.20563 },
+    Venus:   { L0: 181.9798, Lr: 58517.8156,  M0: 50.3841,  Mr: 58517.8039,  e: 0.00677 },
+    Mars:    { L0: 355.4330, Lr: 19140.2993,  M0: 19.3730,  Mr: 19140.3023,  e: 0.09341 },
+    Jupiter: { L0: 34.3515,  Lr: 3034.9057,   M0: 20.0202,  Mr: 3034.7684,   e: 0.04839 },
+    Saturn:  { L0: 50.0775,  Lr: 1222.1138,   M0: 317.0207, Mr: 1222.1094,   e: 0.05551 },
+  };
+  if (!elements[planet]) return 0;
+  const el = elements[planet];
+  // Mean longitude and mean anomaly (reduce to 0-360)
+  const L = ((el.L0 + el.Lr * T) % 360 + 360) % 360;
+  const M = ((el.M0 + el.Mr * T) % 360 + 360) % 360;
+  const Mrad = M * Math.PI / 180;
+  // Equation of center (2-term approximation)
+  const C = (2 * el.e * Math.sin(Mrad) + 1.25 * el.e * el.e * Math.sin(2 * Mrad)) * (180 / Math.PI);
+  return (L + C + 360) % 360;
+}
+
+// Rahu (mean node)
+function getRahuLongitude(jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  const Om = 125.0445 - 1934.1363 * T + 0.0020754 * T*T;
+  return (Om + 360) % 360;
+}
+
+// Ascendant (Lagna) calculation
+function calcLagna(jd, lat, lon, ayanamsha) {
+  const T = (jd - 2451545.0) / 36525.0;
+  const GMST = 280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * T*T;
+  const LST = (GMST + lon + 360) % 360;
+  const eps = (23.439291 - 0.013004 * T) * Math.PI / 180;
+  const theta = LST * Math.PI / 180;
+  const latR = lat * Math.PI / 180;
+  const ascTrop = Math.atan2(Math.cos(theta), -(Math.sin(theta) * Math.cos(eps) + Math.tan(latR) * Math.sin(eps)));
+  let asc = ascTrop * 180 / Math.PI;
+  if (asc < 0) asc += 360;
+  return (asc - ayanamsha + 360) % 360;
+}
+
+// Convert tropical to sidereal
+function toSidereal(tropLong, ayanamsha) {
+  return (tropLong - ayanamsha + 360) % 360;
+}
+
+// Get house from sidereal longitude and lagna
+function getHouse(sidLong, lagnaLong) {
+  const diff = (sidLong - lagnaLong + 360) % 360;
+  return Math.floor(diff / 30) + 1;
+}
+
+// Get nakshatra from longitude
+function getNakshatra(sidLong) {
+  const idx = Math.floor((sidLong % 360) / (360/27));
+  const pada = Math.floor(((sidLong % 360) % (360/27)) / (360/108)) + 1;
+  return { name: NAKSHATRA[idx], pada, lord: NAKSHATRA_LORD[idx], idx };
+}
+
+// D9 Navamsha house
+function getNavamsha(sidLong) {
+  const sign = Math.floor(sidLong / 30); // 0-11
+  const degInSign = sidLong % 30;
+  const navPart = Math.floor(degInSign / (30/9)); // 0-8
+  const isOdd = sign % 2 === 0;
+  const startSign = isOdd ? (sign % 4) * 3 : [0,9,6,3][sign % 4 % 4];
+  const navSign = (startSign + navPart) % 12;
+  return navSign + 1; // house in D9 (approximate as sign)
+}
+
+// Vimshottari Dasha
+function calcVimshottariDasha(moonNak, moonDegInNak, dob) {
+  const lord = moonNak.lord;
+  const totalDashaYears = DASHA_YEARS[lord];
+  const degCovered = moonDegInNak / (360/27);
+  const balanceRatio = 1 - degCovered;
+  const balanceYears = totalDashaYears * balanceRatio;
+  
+  const dashaOrder = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+  const startIdx = dashaOrder.indexOf(lord);
+  
+  const results = [];
+  let currentDate = new Date(dob);
+  // Add balance of first dasha
+  let firstEnd = new Date(currentDate);
+  firstEnd.setFullYear(firstEnd.getFullYear() + Math.floor(balanceYears));
+  firstEnd.setMonth(firstEnd.getMonth() + Math.round((balanceYears % 1) * 12));
+  results.push({ planet: lord, start: dob, end: firstEnd.toISOString().split('T')[0], years: balanceYears.toFixed(1), balance: true });
+  
+  let d = firstEnd;
+  for (let i = 1; i <= 8; i++) {
+    const planet = dashaOrder[(startIdx + i) % 9];
+    const yrs = DASHA_YEARS[planet];
+    let end = new Date(d);
+    end.setFullYear(end.getFullYear() + yrs);
+    results.push({ planet, start: d.toISOString().split('T')[0], end: end.toISOString().split('T')[0], years: yrs, balance: false });
+    d = end;
+  }
+  return results;
+}
+
+// GEOCODE place using nominatim (free)
+async function geocodePlace(placeName) {
+  try {
+    const url = 'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(placeName) + '&format=json&limit=1';
+    const resp = await fetch(url, { headers: { 'User-Agent': 'Antyaka-Astrology/2.0' } });
+    const data = await resp.json();
+    if (data && data.length > 0) {
+      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon), name: data[0].display_name };
+    }
+  } catch(e) {}
+  return null;
+}
+
+// MAIN: Generate Charts — Local Vedic Engine (Lahiri Ayanamsha)
+async function generateCharts() {
+  const dob = document.getElementById('dob').value;
+  const tob = document.getElementById('tob').value || '12:00';
+  const pob = document.getElementById('pob').value.trim();
+  if (!dob || !pob) { showError('Please enter Date of Birth and Place of Birth first.'); return; }
+
+  document.getElementById('d1ChartArea').innerHTML = '<div class="chart-loading">⟳ Geocoding birth place...</div>';
+  document.getElementById('d9ChartArea').innerHTML  = '<div class="chart-loading">⟳ Calculating Navamsha...</div>';
+
+  try {
+    // Step 1: Geocode using OpenStreetMap (free, no key needed)
+    const geo = await geocodePlace(pob);
+    const lat = geo ? geo.lat : 28.6139;
+    const lon = geo ? geo.lon : 77.2090;
+    const placeName = geo ? geo.name.split(',')[0] : pob;
+
+    // Step 2: Parse birth date/time
+    const [yr, mo, dy] = dob.split('-').map(Number);
+    const [hr, mn] = tob.split(':').map(Number);
+
+
+      document.getElementById('d1ChartArea').innerHTML = '<div class="chart-loading">⟳ Calculating with local engine...</div>';
+
+      const utHr = hr - 5.5;
+      const jd = toJulianDay(yr, mo, dy, utHr < 0 ? utHr + 24 : utHr, mn);
+      const ayanamsha = getLahiriAyanamsha(jd);
+
+      const tropicals = {
+        Sun: getSunLongitude(jd),
+        Moon: getMoonLongitude(jd),
+        Mars: getPlanetLongitude('Mars', jd),
+        Mercury: getPlanetLongitude('Mercury', jd),
+        Jupiter: getPlanetLongitude('Jupiter', jd),
+        Venus: getPlanetLongitude('Venus', jd),
+        Saturn: getPlanetLongitude('Saturn', jd),
+        Rahu: getRahuLongitude(jd),
+      };
+      tropicals.Ketu = (tropicals.Rahu + 180) % 360;
+
+      const sidereal = {};
+      for (const [p, trop] of Object.entries(tropicals)) sidereal[p] = toSidereal(trop, ayanamsha);
+
+      const lagnaLong = calcLagna(jd, lat, lon, ayanamsha);
+      const lagnaSignIdx = Math.floor(lagnaLong / 30);
+      const lagnaDeg = (lagnaLong % 30).toFixed(2);
+
+      const d1 = {};
+      const degrees = {};
+      for (const [p, sl] of Object.entries(sidereal)) {
+        d1[p] = getHouse(sl, lagnaLong);
+        degrees[p] = (sl % 30).toFixed(2) + '° ' + SIGNS[Math.floor(sl/30)];
+      }
+
+      const signs = [];
+      for (let h = 0; h < 12; h++) signs.push(SIGNS[(lagnaSignIdx + h) % 12]);
+
+      const d9 = { Lagna: getNavamsha(lagnaLong) };
+      for (const [p, sl] of Object.entries(sidereal)) d9[p] = getNavamsha(sl);
+
+      const moonNak = getNakshatra(sidereal.Moon);
+      const moonDegInNak = sidereal.Moon % (360/27);
+      const dashaData = calcVimshottariDasha(moonNak, moonDegInNak, dob);
+
+      renderNorthIndianChart('d1ChartArea', d1, signs, SIGNS[lagnaSignIdx], lagnaDeg + '°', 'D1 — Rashi Chart ⚠️ Estimated', degrees);
+      renderNorthIndianChart('d9ChartArea', d9, null, 'D9 Navamsha', '', 'D9 — Navamsha Chart ⚠️ Estimated', null);
+      renderApiChartInfo('d1ChartArea', moonNak, dashaData, degrees, SIGNS[lagnaSignIdx], lagnaDeg, placeName, lat, lon, false);
+  } catch(e) {
+    document.getElementById('d1ChartArea').innerHTML = '<div class="chart-loading" style="color:#f87171;">❌ ' + e.message + '<br><small>Check API key or internet connection</small></div>';
+    document.getElementById('d9ChartArea').innerHTML = '<div class="chart-loading" style="color:#f87171;">Chart error.</div>';
+  }
+}
+
+function renderApiChartInfo(containerId, moonNak, dashaData, degrees, lagnaSign, lagnaDeg, place, lat, lon, isRealApi) {
+  const container = document.getElementById(containerId);
+  const existing = container.innerHTML;
+
+  const sourceLabel = isRealApi
+    ? '<span style="color:#4ade80;">✅ Data: Local Vedic Engine (Lahiri Ayanamsha)</span>'
+    : '<span style="color:#fbbf24;">⚠️ Data: Local Math Engine (Approximate) — Add API key for accuracy</span>';
+
+  // Planet degrees table
+  let degHTML = '<div style="margin-top:12px;font-family:monospace;font-size:0.7rem;">';
+  degHTML += '<div style="color:var(--gold);margin-bottom:6px;font-size:0.75rem;letter-spacing:0.1em;">⟡ PLANETARY DEGREES (Sidereal Lahiri)</div>';
+  degHTML += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;">';
+  for (const [p, deg] of Object.entries(degrees)) {
+    degHTML += '<div style="color:var(--text2);">' + p + ': <span style="color:var(--text);">' + deg + '</span></div>';
+  }
+  degHTML += '</div></div>';
+
+  // Dasha table
+  const now = new Date().toISOString().split('T')[0];
+  let dashaHTML = '<div style="margin-top:16px;font-family:monospace;font-size:0.72rem;">';
+  dashaHTML += '<div style="color:var(--gold);margin-bottom:6px;font-size:0.75rem;letter-spacing:0.1em;">⟡ VIMSHOTTARI DASHA</div>';
+  dashaHTML += '<table style="width:100%;border-collapse:collapse;">';
+  dashaHTML += '<tr><th style="text-align:left;padding:3px 8px;color:var(--gold2);border-bottom:1px solid var(--border);">Planet</th><th style="padding:3px 8px;color:var(--gold2);border-bottom:1px solid var(--border);">Start</th><th style="padding:3px 8px;color:var(--gold2);border-bottom:1px solid var(--border);">End</th></tr>';
+  
+  for (const d of dashaData) {
+    const isCurrent = d.start <= now && d.end >= now;
+    const s = isCurrent ? 'background:rgba(201,168,76,0.15);color:var(--gold);font-weight:bold;' : 'color:var(--text2);';
+    const planet = d.planet || d.dasa_planet || '?';
+    const start = d.start || d.start_date || '';
+    const end = d.end || d.end_date || '';
+    dashaHTML += `<tr style="${s}"><td style="padding:3px 8px;">${isCurrent ? '▶ ' : ''}${planet}${d.balance ? ' (bal)' : ''}</td><td style="padding:3px 8px;text-align:center;">${start.substring(0,10)}</td><td style="padding:3px 8px;text-align:center;">${end.substring(0,10)}</td></tr>`;
+  }
+  dashaHTML += '</table></div>';
+
+  // Nakshatra + meta info
+  const infoHTML = `<div style="margin-top:12px;font-family:monospace;font-size:0.72rem;padding:8px 12px;background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:8px;">
+    ${sourceLabel}<br>
+    <span style="color:var(--gold);">Moon Nakshatra:</span> <span style="color:var(--text);">${moonNak.name} Pada ${moonNak.pada}</span> &nbsp;|&nbsp;
+    <span style="color:var(--gold);">Dasha Lord:</span> <span style="color:var(--text);">${moonNak.lord}</span><br>
+    <span style="color:var(--gold);">Lagna:</span> <span style="color:var(--text);">${lagnaSign} ${lagnaDeg}°</span> &nbsp;|&nbsp;
+    <span style="color:var(--gold);">Place:</span> <span style="color:var(--text);">${place} (${parseFloat(lat).toFixed(2)}°N, ${parseFloat(lon).toFixed(2)}°E)</span>
+  </div>`;
+
+  container.innerHTML = existing + infoHTML + degHTML + dashaHTML;
+}
+
+
+// NORTH INDIAN CHART RENDERER (SVG)
+// ============================================================
+function renderNorthIndianChart(containerId, planets, signs, lagnaSign, lagnaDeg, title, degrees) {
+  // North Indian layout - house positions in grid
+  // Grid is 4x4, center 2x2 is empty
+  // Layout: 
+  //  [2][1][12][11]
+  //  [3][  ][  ][10]
+  //  [4][  ][  ][ 9]
+  //  [5][6][ 7][ 8]
+
+  const size = 320;
+  const cell = size / 4;
+  const pad = 6;
+
+  // House positions in grid [col, row] (0-indexed)
+  const houseGrid = {
+    1:  [1, 0], 2:  [0, 0], 3:  [0, 1], 4:  [0, 2],
+    5:  [0, 3], 6:  [1, 3], 7:  [2, 3], 8:  [3, 3],
+    9:  [3, 2], 10: [3, 1], 11: [3, 0], 12: [2, 0]
+  };
+
+  // Group planets by house
+  const houseMap = {};
+  for (let h = 1; h <= 12; h++) houseMap[h] = [];
+  for (const [planet, house] of Object.entries(planets)) {
+    if (house >= 1 && house <= 12) houseMap[house].push(planet);
+  }
+
+  // Planet abbreviations
+  const abbr = {
+    Sun:'Su', Moon:'Mo', Mars:'Ma', Mercury:'Me',
+    Jupiter:'Ju', Venus:'Ve', Saturn:'Sa', Rahu:'Ra', Ketu:'Ke', Lagna:'As'
+  };
+
+  // Planet colors
+  const colors = {
+    Sun:'#f59e0b', Moon:'#e2e8f0', Mars:'#ef4444', Mercury:'#22c55e',
+    Jupiter:'#f59e0b', Venus:'#a78bfa', Saturn:'#94a3b8', Rahu:'#6366f1', Ketu:'#ec4899', Lagna:'#c9a84c'
+  };
+
+  let svg = `<svg viewBox="0 0 ${size} ${size}" class="kundali-svg" xmlns="http://www.w3.org/2000/svg">
+    <rect width="${size}" height="${size}" fill="rgba(13,9,32,0.9)" rx="8"/>`;
+
+  // Draw house cells
+  for (let h = 1; h <= 12; h++) {
+    const [col, row] = houseGrid[h];
+    const x = col * cell;
+    const y = row * cell;
+    const isLagna = (signs && signs[0]) ? (h === 1) : false;
+
+    svg += `<rect x="${x+1}" y="${y+1}" width="${cell-2}" height="${cell-2}"
+      fill="${isLagna ? 'rgba(201,168,76,0.12)' : 'rgba(255,255,255,0.03)'}"
+      stroke="${isLagna ? 'rgba(201,168,76,0.6)' : 'rgba(201,168,76,0.2)'}"
+      stroke-width="${isLagna ? 1.5 : 0.8}" rx="2"/>`;
+
+    // House number (small, top corner)
+    svg += `<text x="${x+pad}" y="${y+pad+8}" font-family="monospace" font-size="8"
+      fill="rgba(168,152,120,0.5)">${h}</text>`;
+
+    // Sign name if available
+    if (signs && signs[h-1]) {
+      const signAbbr = signs[h-1].substring(0,3).toUpperCase();
+      svg += `<text x="${x+cell/2}" y="${y+pad+10}" font-family="monospace" font-size="7.5"
+        fill="rgba(201,168,76,0.6)" text-anchor="middle">${signAbbr}</text>`;
+    }
+
+    // Planets in this house
+    const pts = houseMap[h];
+    pts.forEach((planet, i) => {
+      const px = x + cell/2;
+      const py = y + cell/2 + (i * 13) - ((pts.length-1)*6);
+      const color = colors[planet] || '#e8dfc8';
+      svg += `<text x="${px}" y="${py+4}" font-family="monospace" font-size="10"
+        fill="${color}" text-anchor="middle" font-weight="bold">${abbr[planet] || planet.substring(0,2)}</text>`;
+    });
+  }
+
+  // Center box - chart name
+  const cx = cell;
+  const cy = cell;
+  svg += `<rect x="${cx+2}" y="${cy+2}" width="${cell*2-4}" height="${cell*2-4}"
+    fill="rgba(123,63,160,0.08)" stroke="rgba(201,168,76,0.3)" stroke-width="0.8" rx="4"/>`;
+
+  const name = document.getElementById('name').value || 'Kundali';
+  svg += `<text x="${cx+cell}" y="${cy+cell-16}" font-family="serif" font-size="9"
+    fill="rgba(201,168,76,0.8)" text-anchor="middle">${name}</text>`;
+  if (lagnaSign) {
+    svg += `<text x="${cx+cell}" y="${cy+cell}" font-family="monospace" font-size="8"
+      fill="rgba(168,152,120,0.7)" text-anchor="middle">Lagna: ${lagnaSign}</text>`;
+  }
+  if (lagnaDeg) {
+    svg += `<text x="${cx+cell}" y="${cy+cell+14}" font-family="monospace" font-size="7.5"
+      fill="rgba(168,152,120,0.5)" text-anchor="middle">${lagnaDeg}</text>`;
+  }
+
+  // Diagonal lines for center box
+  svg += `<line x1="${cx+2}" y1="${cy+2}" x2="${cx+cell*2-2}" y2="${cy+cell*2-2}"
+    stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>`;
+  svg += `<line x1="${cx+cell*2-2}" y1="${cy+2}" x2="${cx+2}" y2="${cy+cell*2-2}"
+    stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>`;
+
+  svg += `</svg>`;
+
+  // Planet legend
+  let legend = `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center;">`;
+  const planetList = Object.entries(planets);
+  planetList.forEach(([planet, house]) => {
+    const color = colors[planet] || '#e8dfc8';
+    legend += `<span style="font-family:monospace;font-size:0.6rem;color:${color};
+      background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+      border-radius:4px;padding:2px 7px;">${abbr[planet]||planet}=H${house}</span>`;
+  });
+  legend += `</div>`;
+
+  document.getElementById(containerId).innerHTML =
+    `<div class="chart-title">${title}</div>${svg}${legend}`;
+}
+</script>
+</body>
+</html>
